@@ -1,0 +1,16 @@
+.fotoperfil{
+    height: 1px;
+}
+.fotoperfil
+img{
+    position: relative;
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    top: -60px;
+    margin-left: 10px;
+}
+.informacion{
+    margin: 40px 20px 20px 20px;
+    columns: 2;
+}
