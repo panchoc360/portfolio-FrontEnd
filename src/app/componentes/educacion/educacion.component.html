@@ -1,1 +1,19 @@
-<p>{{educacion}}</p>
+<div class="educacion">
+    <div style="float:left"><h2>Educación</h2></div>
+    <div style="float:right">boton editar</div>
+</div>
+<li *ngFor="let educacion of datosEducacion">
+    <div class="item">
+        <div class="urlimagen" style="float: left">
+        <img src="https://img2.freepng.es/20180509/dje/kisspng-computer-icons-facebook-logo-like-button-blog-5af2ae00d84be0.020883321525853696886.jpg" alt="logo">
+        </div>
+        <div class="informacioneducacion">
+            <div class="nombre"><h3>UCSF</h3></div>
+            <div class="nombre"><h5>Contador</h5></div>
+            <div class="nombre">1990-2000</div>
+        </div>
+    </div>
+</li>
+
+
+<p>{{datosEducacion[0].nombre}}</p>

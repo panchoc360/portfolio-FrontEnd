@@ -1,0 +1,38 @@
+.educacion{
+    height: 40px;
+    align-items: center;
+    background-color: brown;
+}
+
+.item{
+    height: 150px;
+    background-color: aquamarine;
+}
+
+.urlimagen
+{
+    height: 100%;
+    width: 30%;
+    background-color: blue;
+
+}
+
+.urlimagen
+img{
+    float: right;
+    height: 70%;
+    margin: 5% 5% 5% 5%;
+}
+.informacioneducacion{
+    float: right;
+    height: 100%;
+    background-color: chocolate;
+    width: 70%;
+    padding-top: 2%;
+    
+}
+.nombre{
+    background-color: chartreuse;
+
+    margin: 0% 1% 1% 1%;
+}

@@ -4,5 +4,11 @@
 
 }
 .row{
-    margin-bottom: 20px;
+    margin-bottom: 0px;
+    margin-right: 5px;
+
+}
+.row
+.p{
+    margin-bottom: 0px;
 }

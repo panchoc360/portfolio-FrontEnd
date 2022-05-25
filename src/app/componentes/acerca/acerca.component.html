@@ -1,10 +1,10 @@
-<div class="fotoperfil"><img src="https://vanguardia.com.mx/binrepository/1152x737/0c45/1152d648/down-right/11604/AAHC/homer-simpson-cake_VG3300957_MG2671454.jpg"/></div>
+<div class="fotoperfil"><img [src]="datospersona.urlImagenPerfil"/></div>
 <div class="informacion">
-    <div><h3>Homero Simpson</h3>
-    <h2>Web Full Stack Jr.</h2>
-    <h2>Santa Fe, Argentina</h2>
+    <div><h2>{{datospersona.nombre}}</h2>
+    <h4>Web Full Stack Jr.</h4>
+    <h4>Santa Fe, Argentina</h4>
     </div>
-<h4>Sobre mi...</h4>
+<h4>{{datospersona.acercade}}</h4>
 </div>
 <div class="botones">
     <button (click)="contacto()">Contactar</button>
