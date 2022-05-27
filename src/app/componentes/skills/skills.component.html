@@ -1,23 +1,9 @@
+<div *ngFor="let skill of datosskills">
 <div class="row">
-    <p class="p">Idioma español:</p>
+    <p class="p">{{skill.skill}}</p>
     <div class="col-11">
-        <progress class="skills_barra" max="100" value="91"></progress>
+        <progress class="skills_barra" max="100" value={{skill.nivel}}></progress>
     </div>
-    <div class="col-1">91%</div>
+    <div class="col-1">{{skill.nivel}}</div>
 </div>
-
-<div class="row">
-    <p class="p">Idioma inglés:</p>
-    <div class="col-11">
-        <progress class="skills_barra" max="100" value="48"></progress>
-    </div>
-    <div class="col-1">48%</div>
-</div>
-
-<div class="row">
-    <p class="p">Web Full Stack Jr.</p>
-    <div class="col-11">
-        <progress class="skills_barra" max="100" value="23"></progress>
-    </div>
-    <div class="col-1">23%</div>
 </div>

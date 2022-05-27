@@ -1,0 +1,26 @@
+.proyectos{
+    height: 40px;
+    align-items: center;
+    background-color: brown;
+}
+
+.item{
+    height: 200px;
+    background-color: aquamarine;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.informacionproyectos{
+    float: right;
+    height: 100%;
+    background-color: chocolate;
+    width: 100%;
+    padding-top: 2%;
+    
+}
+.nombre{
+    background-color: chartreuse;
+
+    margin: 0% 1% 1% 1%;
+}

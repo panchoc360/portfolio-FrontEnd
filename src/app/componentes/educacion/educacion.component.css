@@ -14,14 +14,16 @@
     height: 100%;
     width: 30%;
     background-color: blue;
-
 }
 
 .urlimagen
 img{
     float: right;
-    height: 70%;
-    margin: 5% 5% 5% 5%;
+    height: 100px;
+    margin-right: 5%;
+    margin-top: 25px;
+    margin-bottom: 25px;
+
 }
 .informacioneducacion{
     float: right;

@@ -14,7 +14,6 @@ export class AcercaComponent implements OnInit {
   datospersona:any;
   ngOnInit(): void {
     this.datosPortfolio.obtenerDatos().subscribe(data =>{
-      console.log(data);
       this.datospersona = data.persona[0];
     })
   }

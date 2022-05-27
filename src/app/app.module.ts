@@ -8,7 +8,8 @@ import { EducacionComponent } from './componentes/educacion/educacion.component'
 import { AcercaComponent } from './componentes/acerca/acerca.component';
 import { SkillsComponent } from './componentes/skills/skills.component';
 import { ProyectosComponent } from './componentes/proyectos/proyectos.component';
-import { HttpClientModule} from '@angular/common/http'
+import { HttpClientModule} from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HttpClientModule} from '@angular/common/http'
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

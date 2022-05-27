@@ -1,0 +1,42 @@
+.experiencia{
+    height: 40px;
+    align-items: center;
+    background-color: brown;
+}
+
+.item{
+    height: 200px;
+    background-color: aquamarine;
+}
+
+.urlimagen
+{
+    height: 100%;
+    width: 30%;
+    background-color: blue;
+
+}
+
+.urlimagen
+img{
+    position: relative;
+    float: right;
+    max-height: 60%;
+    max-width: 60%;
+    margin-right: 5%;
+    margin-top: 20%;
+    margin-bottom: 20%;
+}
+.informacionexperiencia{
+    float: right;
+    height: 100%;
+    background-color: chocolate;
+    width: 70%;
+    padding-top: 2%;
+    
+}
+.nombre{
+    background-color: chartreuse;
+
+    margin: 0% 1% 1% 1%;
+}
