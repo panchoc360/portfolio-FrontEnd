@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 
 @Component({
@@ -7,8 +8,10 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
   styleUrls: ['./acerca.component.css']
 })
 export class AcercaComponent implements OnInit {
+  @Input() btniconoeditar: boolean = false;
   @Output() btnClick = new EventEmitter();
-  
+  faCoffee = faCoffee;
+  loggeado: boolean = true;
   constructor(private datosPortfolio: PortfolioService) { }
 
   datospersona:any;

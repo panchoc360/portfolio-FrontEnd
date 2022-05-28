@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-header',
@@ -9,10 +10,10 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 })
 export class HeaderComponent implements OnInit {
 
-  @Output() btnClick = new EventEmitter();
+  @Output() btnIngresar = new EventEmitter();
   constructor(private datosPortfolio: PortfolioService) { }
   datospersona:any;
-  faCoffee = faCoffee;
+  faCoffee = faPen;
   loggeado:boolean = false;
   
   ngOnInit(): void {
@@ -25,6 +26,6 @@ export class HeaderComponent implements OnInit {
 
   onClick(){
     this.loggeado = !this.loggeado;
-    this.btnClick.emit();
+    this.btnIngresar.emit();
   }
 }

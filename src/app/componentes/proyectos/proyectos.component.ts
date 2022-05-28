@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 
 @Component({
@@ -8,6 +8,7 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
 })
 export class ProyectosComponent implements OnInit {
 
+@Input() btnIngresar: boolean = false;
   constructor(private datosPortfolio: PortfolioService) { }
 
   datosProyectos:any;

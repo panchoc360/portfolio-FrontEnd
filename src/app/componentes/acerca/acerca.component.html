@@ -1,4 +1,10 @@
-<div class="fotoperfil"><img [src]="datospersona.urlImagenPerfil"/></div>
+<div id="imagenprincipal"><img [src]="datospersona.urlImagenPortada" alt="Bienvenidos"/>
+    <div class="iconoeditar" [ngStyle]="{'display': loggeado ? 'block' : 'none'}"><button><fa-icon [icon]="faCoffee"></fa-icon></button></div>
+</div>
+<div class="fotoperfil">
+    <img [src]="datospersona.urlImagenPerfil"/>
+    <div class="iconoeditar" [ngStyle]="{'display': btniconoeditar ? 'block' : 'none'}"><button><fa-icon [icon]="faCoffee"></fa-icon></button></div>
+</div>
 <div class="informacion">
     <div><h2>{{datospersona.nombre}}</h2>
     <h4>Web Full Stack Jr.</h4>

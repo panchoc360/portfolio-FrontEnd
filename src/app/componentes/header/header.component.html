@@ -1,15 +1,14 @@
 <div class="parte_superior_header">
     <div class="AP" style="float: left;"><img src="https://argentinaprograma.inti.gob.ar/pluginfile.php/1/theme_moove/logo/1653341386/APLogo-20-20.png"></div>
     <div class="redessociales" style="float: right">
-        <a href="" target="_top"> <img src="https://www.webespacio.com/wp-content/uploads/2011/06/boton-twitter.jpg"></a>
-        <a href="" target="_top"> <img src="https://img2.freepng.es/20180509/dje/kisspng-computer-icons-facebook-logo-like-button-blog-5af2ae00d84be0.020883321525853696886.jpg"></a>
-        <button class="btn" (click)="onClick()">
+        <a href="" target="_top"> <img src="../../../assets/imagenes/facebook1.png"></a>
+        <a href="" target="_top"> <img src="../../../assets/imagenes/instagram1.png"></a>
+        <a href="" target="_top"> <img src="../../../assets/imagenes/twitter1.png"></a>        
+        <button class="btn" routerLink="/iniciarsesion">
             {{loggeado ? 'Salir' : 'Ingresar'}}
         </button>
+ 
     </div>
-</div>
-<div id="imagenprincipal"><img [src]="datospersona.urlImagenPortada" alt="Bienvenidos"/>
-    <div [ngStyle]="{'display': loggeado ? 'block' : 'none'}"><fa-icon [icon]="faCoffee"></fa-icon></div>
 </div>
 
 
