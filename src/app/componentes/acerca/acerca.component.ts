@@ -15,9 +15,13 @@ export class AcercaComponent implements OnInit {
   constructor(private datosPortfolio: PortfolioService) { }
 
   datospersona:any;
+  fotoperfil: string ="";
+  fotoportada: string ="";
   ngOnInit(): void {
     this.datosPortfolio.obtenerDatos().subscribe(data =>{
       this.datospersona = data.persona[0];
+      this.fotoperfil = this.datospersona.urlImagenPerfil;
+      this.fotoportada = this.datospersona.urlImagenPortada;
     })
   }
   contacto(){

@@ -10,7 +10,7 @@ export class PortfolioService {
   constructor(private http:HttpClient) { }
 
   obtenerDatos():Observable<any>{
-    return this.http.get('http://localhost:8080/obtener/portfolio');
+    return this.http.get('https://backendfrancisco.herokuapp.com/obtener/portfolio');
 
   }
 }

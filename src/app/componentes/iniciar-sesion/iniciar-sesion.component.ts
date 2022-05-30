@@ -14,11 +14,6 @@ export class IniciarSesionComponent implements OnInit {
     this.form=this.FormBuilder.group({
       email:['',[Validators.required, Validators.email]],
       password:['',[Validators.required, Validators.minLength(8)]],
-      deviceInfo:this.FormBuilder.group({
-        deviceId: ["1234567890"],
-       deviceType: ["DEVICE_TYPE_ANDROID"],
-       notificationToken: ["token"]
-      })
     })
   }
 
@@ -34,6 +29,7 @@ export class IniciarSesionComponent implements OnInit {
 
   onEnviar(event:Event){
     event.preventDefault;
+    console.log(this.form.value);
     this.autenticacionService.IniciarSesion(this.form.value).subscribe(data=>{
       this.ruta.navigate(['/portfolio']);
     })
