@@ -1,6 +1,9 @@
-import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
+import { Router } from '@angular/router';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
+import { AppRoutingModule } from '../app-routing.module/app-routing.module';
 
 
 @Component({
@@ -9,12 +12,15 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  
+  @Input() isLogged: boolean = false;
   @Output() btnIngresar = new EventEmitter();
-  constructor(private datosPortfolio: PortfolioService) { }
+
+  constructor(private datosPortfolio: PortfolioService, private loggeado: AutenticacionService, private ruta: Router) {
+  }
+
   datospersona:any;
   faCoffee = faPen;
-  loggeado:boolean = false;
   
   ngOnInit(): void {
     
@@ -22,10 +28,24 @@ export class HeaderComponent implements OnInit {
       console.log(data);
       this.datospersona = data.persona[0];
     });
+    console.log(this.loggeado.currentUserSubject.value);
   }
 
   onClick(){
-    this.loggeado = !this.loggeado;
     this.btnIngresar.emit();
+  }
+  UsuarioLogueado(){
+    let currentUser = this.loggeado.IsLogged;
+    if (currentUser && currentUser.token)
+    return true;
+    else
+    return false;
+  }
+
+  BotonLogin(){
+    if (this.UsuarioLogueado())
+    console.log("Salir")
+    else
+    this.ruta.navigate(['/iniciarsesion']);
   }
 }

@@ -4,8 +4,8 @@
         <a href="" target="_top"> <img src="../../../assets/imagenes/facebook1.png"></a>
         <a href="" target="_top"> <img src="../../../assets/imagenes/instagram1.png"></a>
         <a href="" target="_top"> <img src="../../../assets/imagenes/twitter1.png"></a>        
-        <button class="btn" routerLink="/iniciarsesion">
-            {{loggeado ? 'Salir' : 'Ingresar'}}
+        <button class="btn" (click)="BotonLogin()">
+            {{UsuarioLogueado() ? 'Salir' : 'Ingresar'}}
         </button>
  
     </div>

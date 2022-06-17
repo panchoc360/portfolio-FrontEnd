@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
+import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 
 @Component({
   selector: 'app-acerca',
@@ -8,20 +9,19 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
   styleUrls: ['./acerca.component.css']
 })
 export class AcercaComponent implements OnInit {
-  @Input() btniconoeditar: boolean = false;
-  @Output() btnClick = new EventEmitter();
+
+  @Input() isLogged: boolean = false;
   faCoffee = faCoffee;
-  loggeado: boolean = true;
-  constructor(private datosPortfolio: PortfolioService) { }
+
+  constructor(private datosPortfolio: PortfolioService, private loggeado: AutenticacionService) { 
+    //this.isLogged = loggeado.IsLogged();
+  }
 
   datospersona:any;
-  fotoperfil: string ="";
-  fotoportada: string ="";
+
   ngOnInit(): void {
     this.datosPortfolio.obtenerDatos().subscribe(data =>{
-      this.datospersona = data.persona[0];
-      this.fotoperfil = this.datospersona.urlImagenPerfil;
-      this.fotoportada = this.datospersona.urlImagenPortada;
+      this.datospersona = data.persona;
     })
   }
   contacto(){
@@ -30,4 +30,5 @@ export class AcercaComponent implements OnInit {
   anadirSeccion(){
     console.log("añadir seccion");
   }
+  
 }

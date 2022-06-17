@@ -1,16 +1,16 @@
-<div id="imagenprincipal"><img [src]="fotoportada" alt="Bienvenidos"/>
-    <div class="iconoeditar" [ngStyle]="{'display': loggeado ? 'block' : 'none'}"><button><fa-icon [icon]="faCoffee"></fa-icon></button></div>
+<div id="imagenprincipal"><img [src]="datospersona?.urlImagenPortada" alt="Bienvenidos"/>
+    <div class="iconoeditar" [ngStyle]="{'display': isLogged ? 'block' : 'none'}"><button><fa-icon [icon]="faCoffee"></fa-icon></button></div>
 </div>
 <div class="fotoperfil">
-    <img [src]="fotoperfil"/>
-    <div class="iconoeditar" [ngStyle]="{'display': btniconoeditar ? 'block' : 'none'}"><button><fa-icon [icon]="faCoffee"></fa-icon></button></div>
+    <img [src]="datospersona?.urlImagenPerfil "/>
+    <div class="iconoeditar" [ngStyle]="{'display': isLogged ? 'block' : 'none'}"><button><fa-icon [icon]="faCoffee"></fa-icon></button></div>
 </div>
 <div class="informacion">
-    <div><h2>{{datospersona.nombre}}</h2>
+    <div><h2>{{datospersona?.nombre}}</h2>
     <h4>Web Full Stack Jr.</h4>
     <h4>Santa Fe, Argentina</h4>
     </div>
-<h4>{{datospersona.acercade}}</h4>
+<h4>{{datospersona?.acercade}}</h4>
 </div>
 <div class="botones">
     <button (click)="contacto()">Contactar</button>
