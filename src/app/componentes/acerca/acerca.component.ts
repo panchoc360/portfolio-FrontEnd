@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 
@@ -11,7 +11,7 @@ import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 export class AcercaComponent implements OnInit {
 
   @Input() isLogged: boolean = false;
-  faCoffee = faCoffee;
+  faCoffee = faPen;
 
   constructor(private datosPortfolio: PortfolioService, private loggeado: AutenticacionService) { 
     //this.isLogged = loggeado.IsLogged();
@@ -30,5 +30,11 @@ export class AcercaComponent implements OnInit {
   anadirSeccion(){
     console.log("añadir seccion");
   }
-  
+  UsuarioLogueado(){
+    let currentUser = this.loggeado.IsLogged;
+    if (currentUser && currentUser.token)
+    return true;
+    else
+    return true; //cambiar a false
+  }
 }

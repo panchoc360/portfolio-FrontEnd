@@ -3,40 +3,57 @@
     align-items: center;
     background-color: brown;
 }
+.experiencia
+.iconoeditar{
+float: right;
+margin-right: 2%;
+}
 
 .item{
-    height: 200px;
+    min-height: 200px;
     background-color: aquamarine;
 }
 
 .urlimagen
 {
-    height: 100%;
+    display: flex;
+    min-height: 200px;
     width: 30%;
     background-color: blue;
-
+    align-items: center;
 }
 
 .urlimagen
 img{
-    position: relative;
-    float: right;
-    max-height: 60%;
-    max-width: 60%;
+    max-width: 90%;
+    max-height: 90%;
     margin-right: 5%;
-    margin-top: 20%;
-    margin-bottom: 20%;
 }
 .informacionexperiencia{
+    min-height: 200px;
+    position: relative;
     float: right;
     height: 100%;
     background-color: chocolate;
     width: 70%;
     padding-top: 2%;
     
+    
 }
-.nombre{
+.contenido{
     background-color: chartreuse;
-
-    margin: 0% 1% 1% 1%;
+    margin: 0% 1% 1% 2%;
 }
+
+.nombre{
+    float: left;
+    width: 77%;
+    background-color: blueviolet;
+}
+button{
+    float: right;
+    margin-right: 1%;
+    margin-top: 1%;
+}
+
+

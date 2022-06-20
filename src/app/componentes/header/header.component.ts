@@ -12,9 +12,6 @@ import { AppRoutingModule } from '../app-routing.module/app-routing.module';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  
-  @Input() isLogged: boolean = false;
-  @Output() btnIngresar = new EventEmitter();
 
   constructor(private datosPortfolio: PortfolioService, private loggeado: AutenticacionService, private ruta: Router) {
   }
@@ -31,9 +28,6 @@ export class HeaderComponent implements OnInit {
     console.log(this.loggeado.currentUserSubject.value);
   }
 
-  onClick(){
-    this.btnIngresar.emit();
-  }
   UsuarioLogueado(){
     let currentUser = this.loggeado.IsLogged;
     if (currentUser && currentUser.token)
@@ -44,7 +38,7 @@ export class HeaderComponent implements OnInit {
 
   BotonLogin(){
     if (this.UsuarioLogueado())
-    console.log("Salir")
+    this.loggeado.Salir();
     else
     this.ruta.navigate(['/iniciarsesion']);
   }

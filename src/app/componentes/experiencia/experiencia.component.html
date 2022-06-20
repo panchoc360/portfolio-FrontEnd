@@ -1,18 +1,40 @@
 <div class="experiencia">
-    <div style="float:left"><h2>Experiencia</h2></div>
-    <div style="float:right">boton editar</div>
+    <div style="float:left">
+        <h2>Experiencia</h2>
+    </div>
+    <div class="iconoeditar" [ngStyle]="{'display': UsuarioLogueado() ? 'block' : 'none'}"><button>
+            <fa-icon [icon]="agregarIcono"></fa-icon>
+        </button>
+    </div>
 </div>
 <li *ngFor="let experiencia of datosExperiencia">
     <div class="item">
         <div class="urlimagen" style="float: left">
             <a [href]="experiencia.urlWebPage" target="_blank"><img [src]="experiencia.urlLogo" alt="logo"></a>
-        
         </div>
         <div class="informacionexperiencia">
-            <div class="nombre"><h3>{{experiencia.nombreLugar}}</h3></div>
-            <div class="nombre"><h5>{{experiencia.cargoOcupado}}</h5></div>
-            <div class="nombre">{{experiencia.inicio}}-{{experiencia.fin}}</div>
-            <div class="nombre">{{experiencia.descripcion}}</div>
+            <div class="contenido">
+                <div class="row">
+                    <div class="principalexperiencia">
+                        <div class="nombre">
+                            <h3>{{experiencia.nombreLugar}}</h3>
+                        </div>
+                        <div class="iconosedicion" [ngStyle]="{'display': UsuarioLogueado() ? 'block' : 'none'}">
+                            <button>
+                                <fa-icon [icon]="faeliminar"></fa-icon>
+                            </button>
+                            <button>
+                                <fa-icon [icon]="editIcon"></fa-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="cargo">
+                    <h5>{{experiencia.cargoOcupado}}</h5>
+                </div>
+                <div class="inicio">{{experiencia.inicio}}-{{experiencia.fin}}</div>
+                <div class="descripcion">{{experiencia.descripcion}}</div>
+            </div>
         </div>
     </div>
 </li>

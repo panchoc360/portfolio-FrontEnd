@@ -16,17 +16,20 @@ currentUserSubject: BehaviorSubject<any>;
     this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem('current')|| '{}'))
   }
 
-  //isLogged: boolean = false;
   IniciarSesion(credenciales:any):Observable<any>{
     return this.http.post(this.url, credenciales).pipe(map(data=>{
-      sessionStorage.setItem('currentUser', JSON.stringify(data));
+      localStorage.setItem('currentUser', JSON.stringify(data));
       this.currentUserSubject.next(data);
-      //this.isLogged = true;
       return data;
     }));
   }
 
   get IsLogged(){
     return this.currentUserSubject.value;
+  }
+
+  Salir(){
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
   }
 }

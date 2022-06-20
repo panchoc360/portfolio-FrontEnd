@@ -1,35 +1,52 @@
-.fotoperfil{
-    height: 1px;
-}
-.fotoperfil
-img{
-    position: relative;
-    height: 100px;
-    width: 100px;
-    border-radius: 100%;
-    top: -60px;
-    margin-left: 10px;
-}
-.informacion{
-    margin: 40px 20px 20px 20px;
-    columns: 2;
-}
-#imagenprincipal
-img{
-    width: 100%;
-    height: 300px;
-}
 #imagenprincipal{
     position: relative;
 }
 
-.iconoeditar{
-    position: absolute; left: 94%; top: 1%;
-    margin-top: 3%;
-    margin-right: 10%;
-    float: right;
+#imagenprincipal
+img{
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    border-radius: 20px;
 }
 
-fa-icon{
-    color: rgb(60, 36, 127);
+#imagenprincipal
+.iconoeditar{
+    position: absolute;
+    top: 3%;
+    right: 3%;
+}
+
+#fotoperfil{
+    position: relative;
+    min-width: 100px;
+    height: auto;
+    width: 20%;
+    max-width: 150px;
+
+    margin-left: 4%;
+
+}
+#fotoperfil
+img{
+    width: 100%;
+    border-radius: 100%;
+    margin-top: -60%;
+}
+
+#fotoperfil
+.iconoeditar{
+    position: relative;
+    margin-top: -60%;
+    text-align: center;
+    background-color: darkmagenta;
+
+}
+
+.informacion{
+    margin: 8% 2% 2% 2%;
+}
+
+.boton{
+    border-radius: 200px;
 }

@@ -1,14 +1,42 @@
+.habilidades{
+    height: 40px;
+    background-color: brown;
+}
+.habilidades
+.iconoeditar{
+float: right;
+margin-right: 2%;
+}
+
+.barra{
+    background-color: blanchedalmond;
+    width: 75%;
+}
+
+.habilidad{
+    background-color: blueviolet;
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
 .skills_barra{
-    width: 100%;
+    width: 85%;
     height: 30px;
+    float: left;
+}
+.porcentaje{
+    width: 10%;
+background-color: aquamarine;
+float: right;
+}
+.iconosedicion{
+background-color: chartreuse;
+width: 10%;
+min-width: 90px;
 
 }
-.row{
-    margin-bottom: 0px;
-    margin-right: 5px;
 
-}
-.row
 .p{
-    margin-bottom: 0px;
+    background-color: cornflowerblue;
+    width: 75%;
 }

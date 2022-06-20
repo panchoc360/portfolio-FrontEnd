@@ -1,16 +1,39 @@
 <div class="educacion">
-    <div style="float:left"><h2>Educación</h2></div>
-    <div style="float:right">boton editar</div>
+    <div style="float:left">
+        <h2>Educación</h2>
+    </div>
+    <div class="iconoeditar" [ngStyle]="{'display': UsuarioLogueado() ? 'block' : 'none'}"><button>
+            <fa-icon [icon]="agregarIcono"></fa-icon>
+        </button>
+    </div>
 </div>
 <li *ngFor="let educacion of datosEducacion">
     <div class="item">
         <div class="urlimagen" style="float: left">
-        <img [src]="educacion.urlImagen" alt="logo">
+            <img [src]="educacion.urlImagen" alt="logo">
         </div>
         <div class="informacioneducacion">
-            <div class="nombre"><h3>{{educacion.nombreInstitucion}}</h3></div>
-            <div class="nombre"><h5>{{educacion.titulo}}</h5></div>
-            <div class="nombre">{{educacion.inicio}}-{{educacion.fin}}</div>
+            <div class="contenido">
+                <div class="row">
+                    <div class="principalexperiencia">
+                        <div class="nombre">
+                            <h3>{{educacion.nombreInstitucion}}</h3>
+                        </div>
+                        <div class="iconosedicion" [ngStyle]="{'display': UsuarioLogueado() ? 'block' : 'none'}">
+                            <button>
+                                <fa-icon [icon]="faeliminar"></fa-icon>
+                            </button>
+                            <button>
+                                <fa-icon [icon]="editIcon"></fa-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="titulo">
+                    <h5>{{educacion.titulo}}</h5>
+                </div>
+                <div class="inicio">{{educacion.inicio}}-{{educacion.fin}}</div>
+            </div>
         </div>
     </div>
 </li>
