@@ -2,7 +2,7 @@
     <div style="float:left">
         <h2>Proyectos</h2>
     </div>
-    <div class="iconoeditar" [ngStyle]="{'display': UsuarioLogueado() ? 'block' : 'none'}"><button>
+    <div class="iconoeditar" *ngIf="UsuarioLogueado()"><button>
             <fa-icon [icon]="agregarIcono"></fa-icon>
         </button>
     </div>
@@ -14,7 +14,7 @@
                 <div class="nombre1 col">
                     <h3>{{proyecto.nombre}}</h3>
                 </div>
-                <div class="iconosedicion col" [ngStyle]="{'display': UsuarioLogueado() ? 'block' : 'none'}">
+                <div class="iconosedicion col" *ngIf="UsuarioLogueado()">
                     <button>
                         <fa-icon [icon]="faeliminar"></fa-icon>
                     </button>

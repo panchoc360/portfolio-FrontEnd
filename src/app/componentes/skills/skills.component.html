@@ -2,7 +2,7 @@
     <div style="float:left">
         <h2>Habilidades</h2>
     </div>
-    <div class="iconoeditar" [ngStyle]="{'display': UsuarioLogueado() ? 'block' : 'none'}"><button>
+    <div class="iconoeditar" *ngIf="UsuarioLogueado()"><button>
             <fa-icon [icon]="agregarIcono"></fa-icon>
         </button>
     </div>
@@ -14,7 +14,7 @@
             <progress class="skills_barra" max="100" value={{skill.nivel}}></progress>
             <div class="porcentaje">{{skill.nivel}}%</div>
         </div>
-        <div class="iconosedicion" [ngStyle]="{'display': UsuarioLogueado() ? 'block' : 'none'}">
+        <div class="iconosedicion" *ngIf="UsuarioLogueado()">
             <button>
                 <fa-icon [icon]="faeliminar"></fa-icon>
             </button>

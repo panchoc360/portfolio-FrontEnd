@@ -1,42 +1,93 @@
 <div id="imagenprincipal">
     <img [src]="datospersona?.urlImagenPortada" alt="Bienvenidos" />
-    <div class="iconoeditar" [ngStyle]="{'display': UsuarioLogueado() ? 'block' : 'none'}"><button>
-            <fa-icon [icon]="faCoffee"></fa-icon>
+    <div class="iconoeditar" style="display: flex;" *ngIf="UsuarioLogueado()">
+        <form class="add-form" (ngSubmit)=EditarImagenPrincipal() *ngIf="editarImagenPrincipal">
+            <div class="form-control" style="display: flex ;">
+                <label for="text">Agregar link a imagen principal</label>
+                <input type="text" name="text" id="text" placeholder={{datospersona?.urlImagenPortada}}>
+                <button (click)="editimagenprincipal()">
+                    <fa-icon [icon]="faCheck"></fa-icon>
+                </button>
+                <button (click)="salirEdicionImagenPrincipal()">
+                    <fa-icon [icon]="faX"></fa-icon>
+                </button>
+            </div>
+        </form>
+        <button *ngIf="!editarImagenPrincipal" (click)="editimagenprincipal()">
+            <fa-icon [icon]="faPen"></fa-icon>
         </button>
     </div>
 </div>
 <div id="fotoperfil">
-    <img [src]="datospersona?.urlImagenPerfil" />
-    <div class="iconoeditar" [ngStyle]="{'display': UsuarioLogueado() ? 'block' : 'none'}">
-        <button>
-            <fa-icon [icon]="faCoffee"></fa-icon>
-        </button>
+    <div id="imagenyboton">
+        <img [src]="datospersona?.urlImagenPerfil" />
+        <div class="iconoeditar" *ngIf="UsuarioLogueado() && !editarImagenPerfil" (click)="editimagenperfil()">
+            <button>
+                <fa-icon [icon]="faPen"></fa-icon>
+            </button>
+        </div>
+    </div>
+    <div class="edit">
+        <form class="add-form" (ngSubmit)=EditarImagenPerfil() *ngIf="editarImagenPerfil">
+            <div class="form-control" style="display: flex ;">
+                <label for="text">Agregar link:</label>
+                <input type="text" name="text" id="text" placeholder={{datospersona?.urlImagenPerfil}}>
+                <button (click)="editimagenperfil()">
+                    <fa-icon [icon]="faCheck"></fa-icon>
+                </button>
+                <button (click)="salirEdicionImagenPerfil()">
+                    <fa-icon [icon]="faX"></fa-icon>
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 <div class="informacion">
     <div class="row">
         <div class="col" style="background-color: blue;">
-            <h2>{{datospersona?.nombre}}</h2>
-            <div class="iconoeditar" style="float: inline-end; size: 10%;"
-                [ngStyle]="{'display': UsuarioLogueado() ? 'block' : 'none'}">
-                <button>
-                    <fa-icon [icon]="faCoffee"></fa-icon>
-                </button>
+            <div *ngIf="!editarNombre">
+                <h2>{{datospersona?.nombre}}</h2>
+                <div class="iconoeditar" style="float: inline-end; size: 10%;" *ngIf="UsuarioLogueado()">
+                    <button (click)="HabilitarEdicionNombre()">
+                        <fa-icon [icon]="faPen"></fa-icon>
+                    </button>
+                </div>
+                <div>
+                    <h4>Web Full Stack Jr.</h4>
+                    <h4>Santa Fe, Argentina</h4>
+                </div>
             </div>
-            <div>
-                <h4>Web Full Stack Jr.</h4>
-                <h4>Santa Fe, Argentina</h4>
+            <div *ngIf="editarNombre">
+                <h2><input type="text" name="text" id="text" placeholder={{datospersona?.nombre}}></h2>
+                <button (click)="editNombre()">
+                    <fa-icon [icon]="faCheck"></fa-icon>
+                </button>
+                <button (click)="salirEdicionNombre()">
+                    <fa-icon [icon]="faX"></fa-icon>
+                </button>
+                <div>
+                    <h4>Web Full Stack Jr.</h4>
+                    <h4>Santa Fe, Argentina</h4>
+                </div>
             </div>
         </div>
-
         <div class="col" style="background-color: pink;">
-            <h5>{{datospersona?.acercade}}</h5>
-            <div class="iconoeditar" style="font-size: 12px;"
-                [ngStyle]="{'display': UsuarioLogueado() ? 'block' : 'none'}">
-                <button>
-                    <fa-icon [icon]="faCoffee"></fa-icon>
-                </button>
+            <div *ngIf="!editarAcercaDe">
+                <h5>{{datospersona?.acercade}}</h5>
+                <div class="iconoeditar" style="font-size: 12px;" *ngIf="UsuarioLogueado()">
+                    <button  (click)="HabilitarEdicionAcercaDe()">
+                        <fa-icon [icon]="faPen"></fa-icon>
+                    </button>
+                </div>
             </div>
+            <div *ngIf="editarAcercaDe">
+                <h5><input type="text" name="text" id="text" placeholder={{datospersona?.acercade}}></h5>
+                <button (click)="guardarAcercaDe()">
+                    <fa-icon [icon]="faCheck"></fa-icon>
+                </button>
+                <button (click)="salirEdicionAcercaDe()">
+                    <fa-icon [icon]="faX"></fa-icon>
+                </button>
         </div>
     </div>
 </div>
