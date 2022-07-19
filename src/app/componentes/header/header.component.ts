@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit {
       console.log(data);
       this.datospersona = data.persona[0];
     });
-    console.log(this.loggeado.currentUserSubject.value);
   }
 
   UsuarioLogueado(){

@@ -2,13 +2,32 @@
     <div style="float:left">
         <h2>Habilidades</h2>
     </div>
-    <div class="iconoeditar" *ngIf="UsuarioLogueado()"><button>
+    <div class="iconoeditar" *ngIf="UsuarioLogueado() && !verAgregarSkill">
+        <button (click)="VerAgregarSkill()">
             <fa-icon [icon]="agregarIcono"></fa-icon>
         </button>
     </div>
 </div>
+<form class="add-form" *ngIf="verAgregarSkill">
+    <div class = "form-control">
+        <label for="text">Skill</label>
+        <input type="text" name="text" id="text">
+    </div>
+    <div class = "form-control">
+        <label for="text">Nivel (1-100)</label>
+        <input type="text" name="day" id="day">
+    </div>
+    <div style="height: 20px;">
+    <button (click)="AgregarSkill()">
+        <fa-icon [icon]="faCheck"></fa-icon>
+    </button>
+    <button (click)="salirAgregarSkill()">
+        <fa-icon [icon]="faX"></fa-icon>
+    </button>
+</div>
+</form>
 <div *ngFor="let skill of datosskills">
-    <div class="habilidad row">
+    <div class="habilidad row" *ngIf="editable() != skill.idSkill">
         <p class="p">{{skill.skill}}</p>
         <div class="barra">
             <progress class="skills_barra" max="100" value={{skill.nivel}}></progress>
@@ -18,9 +37,29 @@
             <button>
                 <fa-icon [icon]="faeliminar"></fa-icon>
             </button>
-            <button>
+            <button (click)="editarskillparticular(skill.idSkill)">
                 <fa-icon [icon]="editIcon"></fa-icon>
             </button>
         </div>
+    </div>
+    <div *ngIf="editable() == skill.idSkill">
+        <form class="edit-form">
+            <div class = "form-control">
+                <label for="text">Skill</label>
+                <input type="text" name="text" id="text" value="{{skill.skill }}">
+            </div>
+            <div class = "form-control">
+                <label for="text">Nivel (1-100)</label>
+                <input type="text" name="day" id="day" value="{{skill.nivel}}">
+            </div>
+            <div style="height: 35px;">
+            <button (click)="EditarSkill()">
+                <fa-icon [icon]="faCheck"></fa-icon>
+            </button>
+            <button (click)="salirEdicionSkill()">
+                <fa-icon [icon]="faX"></fa-icon>
+            </button>
+        </div>
+        </form>
     </div>
 </div>

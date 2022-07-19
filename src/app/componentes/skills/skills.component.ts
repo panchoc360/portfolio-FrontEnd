@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
-import { faPen, faAdd, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faAdd, faTrash, faCheck, faX } from '@fortawesome/free-solid-svg-icons';
 import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 
 @Component({
@@ -9,11 +9,17 @@ import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
   styleUrls: ['./skills.component.css']
 })
 export class SkillsComponent implements OnInit {
-  
+
+  verAgregarSkill: boolean = false;
+  editarskill: boolean = false;
+  skillaeditar: string = "";
+
   constructor(private datosPortfolio: PortfolioService, private loggeado: AutenticacionService) { }
 
   datosskills:any;
   editIcon = faPen;
+  faCheck = faCheck;
+  faX = faX;
   agregarIcono = faAdd;
   faeliminar = faTrash;
 
@@ -27,6 +33,35 @@ export class SkillsComponent implements OnInit {
     if (currentUser && currentUser.token)
     return true;
     else
-    return true; //cambiar a false
+    return false;
+  }
+
+  AgregarSkill(){
+
+    //aca va codigo para agregar la experiencia
+  }
+  salirAgregarSkill(){
+    this.verAgregarSkill = false;
+  }
+  VerAgregarSkill(){
+    this.verAgregarSkill = true;
+  }
+
+  editarskillparticular(skillid : string)
+  {
+    this.skillaeditar = skillid;
+    console.log(skillid);
+  }
+
+  editable() : string
+  {
+    return this.skillaeditar;
+  }
+  salirEdicionSkill(){
+    this.skillaeditar = "";
+
+  }
+  EditarSkill(){
+    console.log("Skill " + this.skillaeditar + " editada");
   }
 }

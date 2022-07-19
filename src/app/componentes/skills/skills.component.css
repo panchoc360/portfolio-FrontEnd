@@ -40,3 +40,16 @@ min-width: 90px;
     background-color: cornflowerblue;
     width: 75%;
 }
+
+button{
+    float: right;
+    margin-right: 1%;
+    margin-top: 1%;
+}
+
+label{
+    min-width: 140px;
+}
+input{
+width: 100%;
+}

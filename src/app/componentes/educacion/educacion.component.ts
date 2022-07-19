@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
-import { faPen, faAdd, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faAdd, faTrash, faCheck, faX } from '@fortawesome/free-solid-svg-icons';
 import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 
 @Component({
@@ -10,11 +10,19 @@ import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 })
 export class EducacionComponent implements OnInit {
 
+  verAgregarEducacion: boolean = false;
+  editareducacion: boolean = false;
+  eduaeditar: string = "";
+
   constructor(private datosPortfolio: PortfolioService, private loggeado: AutenticacionService) { }
   datosEducacion:any;
   editIcon = faPen;
+  faCheck = faCheck;
+  faX = faX;
   agregarIcono = faAdd;
   faeliminar = faTrash;
+  text:string = "";
+  day: string = "";
 
   ngOnInit(): void {
     this.datosPortfolio.obtenerDatos().subscribe(data =>{
@@ -26,6 +34,34 @@ export class EducacionComponent implements OnInit {
     if (currentUser && currentUser.token)
     return true;
     else
-    return true; //cambiar a false
+    return false;
+  }
+  AgregarEducacion(){
+
+    //aca va codigo para agregar la experiencia
+  }
+  salirAgregarEducacion(){
+    this.verAgregarEducacion = false;
+  }
+  VerAgregarEducacion(){
+    this.verAgregarEducacion = true;
+  }
+
+  editareducacionparticular(eduid : string)
+  {
+    this.eduaeditar = eduid;
+    console.log(eduid);
+  }
+
+  editable() : string
+  {
+    return this.eduaeditar;
+  }
+  salirEdicionEducacion(){
+    this.eduaeditar = "";
+
+  }
+  EditarEducacion(){
+    console.log("Edu " + this.eduaeditar + " editada");
   }
 }

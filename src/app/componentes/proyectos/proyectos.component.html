@@ -2,13 +2,44 @@
     <div style="float:left">
         <h2>Proyectos</h2>
     </div>
-    <div class="iconoeditar" *ngIf="UsuarioLogueado()"><button>
+    <div class="iconoeditar" *ngIf="UsuarioLogueado() && !verAgregarProyecto">
+        <button (click)="VerAgregarProyecto()">
             <fa-icon [icon]="agregarIcono"></fa-icon>
         </button>
     </div>
 </div>
+<form class="add-form" *ngIf="verAgregarProyecto">
+    <div class = "form-control">
+        <label for="text">Nombre</label>
+        <input type="text" name="text" id="text">
+    </div>
+    <div class = "form-control">
+        <label for="text">Descripción</label>
+        <input type="text" name="day" id="day">
+    </div>
+    <div class = "form-control">
+        <label for="text">Fecha</label>
+        <input type="text" name="day" id="day">
+    </div>
+    <div class = "form-control">
+        <label for="text">URL Imagen</label>
+        <input type="text" name="day" id="day">
+    </div>
+    <div class = "form-control">
+        <label for="text">URL Proyecto</label>
+        <input type="text" name="day" id="day">
+    </div>
+    <div style="height: 20px;">
+    <button (click)="AgregarProyecto()">
+        <fa-icon [icon]="faCheck"></fa-icon>
+    </button>
+    <button (click)="salirAgregarProyecto()">
+        <fa-icon [icon]="faX"></fa-icon>
+    </button>
+</div>
+</form>
 <li *ngFor="let proyecto of datosProyectos">
-    <div class="item">
+    <div class="item"  *ngIf="editable() != proyecto.idProyecto">
         <div class="informacionproyectos">
             <div class="nombre row">
                 <div class="nombre1 col">
@@ -18,7 +49,7 @@
                     <button>
                         <fa-icon [icon]="faeliminar"></fa-icon>
                     </button>
-                    <button>
+                    <button  (click)="editarproyectoparticular(proyecto.idProyecto)">
                         <fa-icon [icon]="editIcon"></fa-icon>
                     </button>
                 </div>
@@ -28,5 +59,37 @@
             </div>
             <div class="nombre row">{{proyecto.descripcion}}</div>
         </div>
+    </div>
+    <div *ngIf="editable() == proyecto.idProyecto">
+        <form class="edit-form">
+            <div class = "form-control">
+                <label for="text">Nombre</label>
+                <input type="text" name="text" id="text" value="{{proyecto.nombre}}">
+            </div>
+            <div class = "form-control">
+                <label for="text">Descripción</label>
+                <input type="text" name="day" id="day" value="{{proyecto.descripcion}}">
+            </div>
+            <div class = "form-control">
+                <label for="text">Fecha</label>
+                <input type="text" name="day" id="day"value="{{proyecto.fecha}}">
+            </div>
+            <div class = "form-control">
+                <label for="text">URL Imagen</label>
+                <input type="text" name="day" id="day" value="{{proyecto.urlImagen}}">
+            </div>
+            <div class = "form-control">
+                <label for="text">URL Proyecto</label>
+                <input type="text" name="day" id="day" value="{{proyecto.url}}">
+            </div>
+            <div style="height: 35px;">
+            <button (click)="EditarProyecto()">
+                <fa-icon [icon]="faCheck"></fa-icon>
+            </button>
+            <button (click)="salirEdicionProyecto()">
+                <fa-icon [icon]="faX"></fa-icon>
+            </button>
+        </div>
+        </form>
     </div>
 </li>

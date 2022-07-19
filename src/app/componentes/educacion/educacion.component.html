@@ -2,13 +2,48 @@
     <div style="float:left">
         <h2>Educación</h2>
     </div>
-    <div class="iconoeditar" *ngIf="UsuarioLogueado()"><button>
+    <div class="iconoeditar" *ngIf="UsuarioLogueado() && !verAgregarEducacion">
+        <button (click)="VerAgregarEducacion()">
             <fa-icon [icon]="agregarIcono"></fa-icon>
         </button>
     </div>
 </div>
+<form class="add-form" *ngIf="verAgregarEducacion">
+    <div class = "form-control">
+        <label for="text">Lugar</label>
+        <input type="text" name="text" id="text">
+    </div>
+    <div class = "form-control">
+        <label for="text">Cargo ocupado</label>
+        <input type="text" name="day" id="day">
+    </div>
+    <div class = "form-control">
+        <label for="text">Fecha Inicio</label>
+        <input type="text" name="day" id="day">
+    </div>
+    <div class = "form-control">
+        <label for="text">Fecha Fin</label>
+        <input type="text" name="day" id="day">
+    </div>
+    <div class = "form-control">
+        <label for="text">URL Imagen Lugar</label>
+        <input type="text" name="day" id="day">
+    </div>
+    <div class = "form-control">
+        <label for="text">URL Link Lugar</label>
+        <input type="text" name="day" id="day">
+    </div>
+    <div style="height: 20px;">
+    <button (click)="AgregarEducacion()">
+        <fa-icon [icon]="faCheck"></fa-icon>
+    </button>
+    <button (click)="salirAgregarEducacion()">
+        <fa-icon [icon]="faX"></fa-icon>
+    </button>
+</div>
+</form>
 <li *ngFor="let educacion of datosEducacion">
-    <div class="item">
+    <div class="item" *ngIf="editable() != educacion.idEducacion">
         <div class="urlimagen" style="float: left">
             <img [src]="educacion.urlImagen" alt="logo">
         </div>
@@ -23,7 +58,7 @@
                             <button>
                                 <fa-icon [icon]="faeliminar"></fa-icon>
                             </button>
-                            <button>
+                            <button (click)="editareducacionparticular(educacion.idEducacion)">
                                 <fa-icon [icon]="editIcon"></fa-icon>
                             </button>
                         </div>
@@ -35,5 +70,37 @@
                 <div class="inicio">{{educacion.inicio}}-{{educacion.fin}}</div>
             </div>
         </div>
+    </div>
+    <div *ngIf="editable() == educacion.idEducacion">
+        <form class="edit-form">
+            <div class = "form-control">
+                <label for="text">Lugar</label>
+                <input type="text" name="text" id="text" value="{{educacion.nombreInstitucion}}">
+            </div>
+            <div class = "form-control">
+                <label for="text">Título</label>
+                <input type="text" name="day" id="day" value="{{educacion.titulo}}">
+            </div>
+            <div class = "form-control">
+                <label for="text">Fecha Inicio</label>
+                <input type="text" name="day" id="day"value="{{educacion.inicio}}">
+            </div>
+            <div class = "form-control">
+                <label for="text">Fecha Fin</label>
+                <input type="text" name="day" id="day" value="{{educacion.Fin}}">
+            </div>
+            <div class = "form-control">
+                <label for="text">URL Imagen Lugar</label>
+                <input type="text" name="day" id="day" value="{{educacion.urlImagen}}">
+            </div>
+            <div style="height: 35px;">
+            <button (click)="EditarEducacion()">
+                <fa-icon [icon]="faCheck"></fa-icon>
+            </button>
+            <button (click)="salirEdicionEducacion()">
+                <fa-icon [icon]="faX"></fa-icon>
+            </button>
+        </div>
+        </form>
     </div>
 </li>

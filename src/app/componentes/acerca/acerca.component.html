@@ -1,11 +1,11 @@
 <div id="imagenprincipal">
     <img [src]="datospersona?.urlImagenPortada" alt="Bienvenidos" />
     <div class="iconoeditar" style="display: flex;" *ngIf="UsuarioLogueado()">
-        <form class="add-form" (ngSubmit)=EditarImagenPrincipal() *ngIf="editarImagenPrincipal">
+        <form class="add-form" (ngSubmit)="EditarImagenPrincipal()" *ngIf="editarImagenPrincipal">
             <div class="form-control" style="display: flex ;">
                 <label for="text">Agregar link a imagen principal</label>
-                <input type="text" name="text" id="text" placeholder={{datospersona?.urlImagenPortada}}>
-                <button (click)="editimagenprincipal()">
+                <input type="text" name="text" id="campoeditable" [formControl]="campoeditable">
+                <button type="submit">
                     <fa-icon [icon]="faCheck"></fa-icon>
                 </button>
                 <button (click)="salirEdicionImagenPrincipal()">
@@ -31,7 +31,7 @@
         <form class="add-form" (ngSubmit)=EditarImagenPerfil() *ngIf="editarImagenPerfil">
             <div class="form-control" style="display: flex ;">
                 <label for="text">Agregar link:</label>
-                <input type="text" name="text" id="text" placeholder={{datospersona?.urlImagenPerfil}}>
+                <input type="text" name="text" id="text" value={{datospersona?.urlImagenPerfil}}>
                 <button (click)="editimagenperfil()">
                     <fa-icon [icon]="faCheck"></fa-icon>
                 </button>
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div *ngIf="editarNombre">
-                <h2><input type="text" name="text" id="text" placeholder={{datospersona?.nombre}}></h2>
+                <h2><input type="text" name="text" id="text" value={{datospersona?.nombre}}></h2>
                 <button (click)="editNombre()">
                     <fa-icon [icon]="faCheck"></fa-icon>
                 </button>
@@ -81,7 +81,7 @@
                 </div>
             </div>
             <div *ngIf="editarAcercaDe">
-                <h5><input type="text" name="text" id="text" placeholder={{datospersona?.acercade}}></h5>
+                <h5><input type="text" name="text" id="text" value={{datospersona?.acercade}}></h5>
                 <button (click)="guardarAcercaDe()">
                     <fa-icon [icon]="faCheck"></fa-icon>
                 </button>

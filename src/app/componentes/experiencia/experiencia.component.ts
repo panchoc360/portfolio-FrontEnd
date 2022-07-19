@@ -10,8 +10,8 @@ import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 })
 export class ExperienciaComponent implements OnInit {
 
-  verAgregarExperiencia: boolean = true; //pasar a false
-  editarexperiencia: boolean = false; //pasar a false 
+  verAgregarExperiencia: boolean = false;
+  editarexperiencia: boolean = false;
   expaeditar: string = "";
 
   constructor(private datosPortfolio: PortfolioService, private loggeado: AutenticacionService) { }
@@ -37,7 +37,7 @@ export class ExperienciaComponent implements OnInit {
     if (currentUser && currentUser.token)
     return true;
     else
-    return true; //cambiar a false
+    return false;
   }
 
   AgregarExperiencia(){

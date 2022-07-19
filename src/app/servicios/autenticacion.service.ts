@@ -13,23 +13,25 @@ url="http://localhost:8080/iniciarsesion";
 currentUserSubject: BehaviorSubject<any>;
 
   constructor(private http:HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem('current')|| '{}'))
+    this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem('currentUser')|| '{}'))
+    console.log(this.currentUserSubject);
   }
 
   IniciarSesion(credenciales:any):Observable<any>{
     return this.http.post(this.url, credenciales).pipe(map(data=>{
-      localStorage.setItem('currentUser', JSON.stringify(data));
+      sessionStorage.setItem('currentUser', JSON.stringify(data));
       this.currentUserSubject.next(data);
       return data;
     }));
   }
 
   get IsLogged(){
+
     return this.currentUserSubject.value;
   }
 
   Salir(){
-    localStorage.removeItem('currentUser');
+    sessionStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }
 }
