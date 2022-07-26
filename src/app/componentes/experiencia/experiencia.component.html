@@ -8,33 +8,37 @@
         </button>
     </div>
 </div>
-<form class="add-form" *ngIf="verAgregarExperiencia">
+<form class="add-form" (ngSubmit)="AgregarExperiencia()" *ngIf="verAgregarExperiencia">
     <div class = "form-control">
         <label for="text">Lugar</label>
-        <input type="text" name="text" id="text">
+        <input type="text" name="text" id="text" [formControl]="agregarLugar">
     </div>
     <div class = "form-control">
         <label for="text">Cargo ocupado</label>
-        <input type="text" name="day" id="day">
+        <input type="text" name="day" id="day" [formControl]="agregarCargo">
     </div>
     <div class = "form-control">
         <label for="text">Fecha Inicio</label>
-        <input type="text" name="day" id="day">
+        <input type="text" name="day" id="day" [formControl]="agregarFechaInicio">
     </div>
     <div class = "form-control">
         <label for="text">Fecha Fin</label>
-        <input type="text" name="day" id="day">
+        <input type="text" name="day" id="day" [formControl]="agregarFechaFin">
+    </div>
+    <div class = "form-control">
+        <label for="text">Descripción</label>
+        <input type="text" name="day" id="day" [formControl]="agregardescripcion">
     </div>
     <div class = "form-control">
         <label for="text">URL Imagen Lugar</label>
-        <input type="text" name="day" id="day">
+        <input type="text" name="day" id="day" [formControl]="agregarURLLogo">
     </div>
     <div class = "form-control">
         <label for="text">URL Link Lugar</label>
-        <input type="text" name="day" id="day">
+        <input type="text" name="day" id="day" [formControl]="agregarURLPagina">
     </div>
     <div style="height: 20px;">
-    <button (click)="AgregarExperiencia()">
+    <button type="submit">
         <fa-icon [icon]="faCheck"></fa-icon>
     </button>
     <button (click)="salirAgregarExperiencia()">
@@ -56,7 +60,7 @@
                             <h3>{{experiencia.nombreLugar}}</h3>
                         </div>
                         <div class="iconosedicion" *ngIf="UsuarioLogueado()">
-                            <button>
+                            <button (click)="eliminarExperiencia(experiencia.idExperiencia)">
                                 <fa-icon [icon]="faeliminar"></fa-icon>
                             </button>
                             <button (click)="editarexperienciaparticular(experiencia.idExperiencia)">
@@ -74,30 +78,34 @@
         </div>
     </div>
     <div *ngIf="editable() == experiencia.idExperiencia">
-        <form class="edit-form">
+        <form class="edit-form" [formGroup]="formEdit">
             <div class = "form-control">
                 <label for="text">Lugar</label>
-                <input type="text" name="text" id="text" value="{{experiencia.nombreLugar}}">
+                <input type="text" name="text" id="text" formControlName="nombreLugar">
             </div>
             <div class = "form-control">
                 <label for="text">Cargo ocupado</label>
-                <input type="text" name="day" id="day" value="{{experiencia.cargoOcupado}}">
+                <input type="text" name="day" id="day" formControlName="cargoOcupado">
             </div>
             <div class = "form-control">
                 <label for="text">Fecha Inicio</label>
-                <input type="text" name="day" id="day"value="{{experiencia.inicio}}">
+                <input type="text" name="day" id="day"formControlName="inicio">
             </div>
             <div class = "form-control">
                 <label for="text">Fecha Fin</label>
-                <input type="text" name="day" id="day" value="{{experiencia.Fin}}">
+                <input type="text" name="day" id="day" formControlName="fin">
+            </div>
+            <div class = "form-control">
+                <label for="text">Descripción</label>
+                <input type="text" name="day" id="day" formControlName="descripcion">
             </div>
             <div class = "form-control">
                 <label for="text">URL Imagen Lugar</label>
-                <input type="text" name="day" id="day" value="{{experiencia.urlLogo}}">
+                <input type="text" name="day" id="day" formControlName="urlLogo">
             </div>
             <div class = "form-control">
                 <label for="text">URL Link Lugar</label>
-                <input type="text" name="day" id="day" value="{{experiencia.urlWebPage}}">
+                <input type="text" name="day" id="day" formControlName="urlWebPage">
             </div>
             <div style="height: 35px;">
             <button (click)="EditarExperiencia()">

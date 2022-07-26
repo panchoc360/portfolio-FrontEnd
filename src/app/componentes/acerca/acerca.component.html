@@ -4,7 +4,7 @@
         <form class="add-form" (ngSubmit)="EditarImagenPrincipal()" *ngIf="editarImagenPrincipal">
             <div class="form-control" style="display: flex ;">
                 <label for="text">Agregar link a imagen principal</label>
-                <input type="text" name="text" id="campoeditable" [formControl]="campoeditable">
+                <input type="text" name="text" [formControl]="campoEditablePortada" >
                 <button type="submit">
                     <fa-icon [icon]="faCheck"></fa-icon>
                 </button>
@@ -13,7 +13,7 @@
                 </button>
             </div>
         </form>
-        <button *ngIf="!editarImagenPrincipal" (click)="editimagenprincipal()">
+        <button *ngIf="!editarImagenPrincipal" (click)="HabilitarEdicionImagenPrincipal()">
             <fa-icon [icon]="faPen"></fa-icon>
         </button>
     </div>
@@ -21,18 +21,18 @@
 <div id="fotoperfil">
     <div id="imagenyboton">
         <img [src]="datospersona?.urlImagenPerfil" />
-        <div class="iconoeditar" *ngIf="UsuarioLogueado() && !editarImagenPerfil" (click)="editimagenperfil()">
+        <div class="iconoeditar" *ngIf="UsuarioLogueado() && !editarImagenPerfil" (click)="HabilitarEdicionImagenPerfil()">
             <button>
                 <fa-icon [icon]="faPen"></fa-icon>
             </button>
         </div>
     </div>
     <div class="edit">
-        <form class="add-form" (ngSubmit)=EditarImagenPerfil() *ngIf="editarImagenPerfil">
+        <form class="add-form" (ngSubmit)="EditarImagenPerfil()" *ngIf="editarImagenPerfil">
             <div class="form-control" style="display: flex ;">
                 <label for="text">Agregar link:</label>
-                <input type="text" name="text" id="text" value={{datospersona?.urlImagenPerfil}}>
-                <button (click)="editimagenperfil()">
+                <input type="text" name="text" id="campoeditable" [formControl]="campoEditablePerfil">
+                <button type="submit">
                     <fa-icon [icon]="faCheck"></fa-icon>
                 </button>
                 <button (click)="salirEdicionImagenPerfil()">
@@ -53,16 +53,16 @@
                     </button>
                 </div>
                 <div>
-                    <h4>Web Full Stack Jr.</h4>
+                    <h4>Web Full Stack Jr.</h4> 
                     <h4>Santa Fe, Argentina</h4>
                 </div>
             </div>
             <div *ngIf="editarNombre">
-                <h2><input type="text" name="text" id="text" value={{datospersona?.nombre}}></h2>
-                <button (click)="editNombre()">
+                <h2><input type="text" name="text" id="campoeditable" [formControl]="campoEditableNombre"></h2>
+                <button (click)="EditarNombre()">
                     <fa-icon [icon]="faCheck"></fa-icon>
                 </button>
-                <button (click)="salirEdicionNombre()">
+                <button (click)="SalirEdicionNombre()">
                     <fa-icon [icon]="faX"></fa-icon>
                 </button>
                 <div>
@@ -81,11 +81,11 @@
                 </div>
             </div>
             <div *ngIf="editarAcercaDe">
-                <h5><input type="text" name="text" id="text" value={{datospersona?.acercade}}></h5>
-                <button (click)="guardarAcercaDe()">
+                <h5><input type="text" name="text" id="campoeditable" [formControl]="campoEditableAcercaDe"></h5>
+                <button (click)="GuardarAcercaDe()">
                     <fa-icon [icon]="faCheck"></fa-icon>
                 </button>
-                <button (click)="salirEdicionAcercaDe()">
+                <button (click)="SalirEdicionAcercaDe()">
                     <fa-icon [icon]="faX"></fa-icon>
                 </button>
         </div>

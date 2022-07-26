@@ -2,10 +2,9 @@ import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { faPen, faCheck, faX, faSortNumericDownAlt } from '@fortawesome/free-solid-svg-icons';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
-import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
-import { Persona } from 'src/app/Persona';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Persona } from 'src/app/Modelos';
+import { FormControl} from '@angular/forms';
 
 
 @Component({
@@ -25,15 +24,15 @@ export class AcercaComponent implements OnInit {
   editarNombre: boolean = false;
   editarAcercaDe: boolean = false;
   text: string = "";
-  campoeditable = new FormControl('');
+  campoEditablePortada = new FormControl('');
+  campoEditablePerfil = new FormControl('');
+  campoEditableNombre = new FormControl('');
+  campoEditableAcercaDe = new FormControl('');
   
   constructor(private datosPortfolio: PortfolioService, private loggeado: AutenticacionService, private http: HttpClient) {
 
   }
-
   datospersona: any;
-  
-
 
   ngOnInit(): void {
     this.datosPortfolio.obtenerDatos().subscribe(data => {
@@ -41,11 +40,9 @@ export class AcercaComponent implements OnInit {
     })
   }
   contacto() {
-    console.log("contacto");
+    console.log("contacto"); //poner algo para contactarse!
   }
-  anadirSeccion() {
-    console.log("añadir seccion");
-  }
+
   UsuarioLogueado() {
     let currentUser = this.loggeado.IsLogged;
     if (currentUser && currentUser.token)
@@ -53,48 +50,69 @@ export class AcercaComponent implements OnInit {
     else
       return false;
   }
-  editimagenprincipal() {
-    this.campoeditable.setValue(this.datospersona.urlImagenPortada)
-    this.editarImagenPrincipal = true;
 
+
+  HabilitarEdicionImagenPrincipal() {
+    this.campoEditablePortada.setValue(this.datospersona.urlImagenPortada)
+    this.editarImagenPrincipal = true;
   }
   EditarImagenPrincipal() {
     let datospersonamodificados: Persona = this.datospersona;
-    datospersonamodificados.urlImagenPortada = this.campoeditable.value;
+    datospersonamodificados.urlImagenPortada = this.campoEditablePortada.value;
       this.http.put<Persona>('http://localhost:8080/editar/persona/', datospersonamodificados)
       .subscribe(data => this.datospersona = data);
       this.editarImagenPrincipal = false;
-  
   }
   salirEdicionImagenPrincipal() {
     this.editarImagenPrincipal = false;
+  }
 
+
+  HabilitarEdicionImagenPerfil() {
+    this.campoEditablePerfil.setValue(this.datospersona.urlImagenPerfil)
+    this.editarImagenPerfil = true;
   }
   EditarImagenPerfil() {
-
+    let datospersonamodificados: Persona = this.datospersona;
+    datospersonamodificados.urlImagenPerfil = this.campoEditablePerfil.value;
+      this.http.put<Persona>('http://localhost:8080/editar/persona/', datospersonamodificados)
+      .subscribe(data => this.datospersona = data);
+      this.editarImagenPerfil = false;
   }
   salirEdicionImagenPerfil() {
     this.editarImagenPerfil = false;
   }
-  editimagenperfil() {
-    this.editarImagenPerfil = true;
-  }
-  editNombre(){
 
-  }
-  salirEdicionNombre(){
-    this.editarNombre = false;
-  }
+
   HabilitarEdicionNombre(){
+    this.campoEditableNombre.setValue(this.datospersona.nombre)
     this.editarNombre = true;
   }
-  guardarAcercaDe(){
+  EditarNombre(){
+    let datospersonamodificados: Persona = this.datospersona;
+    datospersonamodificados.nombre = this.campoEditableNombre.value;
+      this.http.put<Persona>('http://localhost:8080/editar/persona/', datospersonamodificados)
+      .subscribe(data => this.datospersona = data);
+      this.editarNombre = false;
+  }
+  SalirEdicionNombre(){
+    this.editarNombre = false;
+  }
 
-  }
-  salirEdicionAcercaDe(){
-    this.editarAcercaDe = false;
-  }
+
   HabilitarEdicionAcercaDe(){
+    this.campoEditableAcercaDe.setValue(this.datospersona.acercade)
     this.editarAcercaDe = true;
   }
+  GuardarAcercaDe(){
+    let datospersonamodificados: Persona = this.datospersona;
+    datospersonamodificados.acercade = this.campoEditableAcercaDe.value;
+      this.http.put<Persona>('http://localhost:8080/editar/persona/', datospersonamodificados)
+      .subscribe(data => this.datospersona = data);
+      this.editarAcercaDe = false;
+  }
+  SalirEdicionAcercaDe(){
+    this.editarAcercaDe = false;
+  }
+
 }

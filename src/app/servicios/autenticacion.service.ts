@@ -14,7 +14,6 @@ currentUserSubject: BehaviorSubject<any>;
 
   constructor(private http:HttpClient) {
     this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem('currentUser')|| '{}'))
-    console.log(this.currentUserSubject);
   }
 
   IniciarSesion(credenciales:any):Observable<any>{

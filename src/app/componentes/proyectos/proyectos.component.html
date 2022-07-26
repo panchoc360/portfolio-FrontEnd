@@ -8,29 +8,29 @@
         </button>
     </div>
 </div>
-<form class="add-form" *ngIf="verAgregarProyecto">
+<form class="add-form" [formGroup]="formNuevo" (ngSubmit)="AgregarProyecto()" *ngIf="verAgregarProyecto">
     <div class = "form-control">
-        <label for="text">Nombre</label>
-        <input type="text" name="text" id="text">
+        <label for="text">Nombre del Proyecto</label>
+        <input type="text" name="text" id="text" formControlName="nombre">
+    </div>
+    <div class = "form-control">
+        <label for="text">Fecha de realización</label>
+        <input type="text" name="day" id="day" formControlName="fecha">
     </div>
     <div class = "form-control">
         <label for="text">Descripción</label>
-        <input type="text" name="day" id="day">
+        <input type="text" name="day" id="day" formControlName="descripcion">
     </div>
     <div class = "form-control">
-        <label for="text">Fecha</label>
-        <input type="text" name="day" id="day">
+        <label for="text">URL</label>
+        <input type="text" name="day" id="day" formControlName="url">
     </div>
     <div class = "form-control">
         <label for="text">URL Imagen</label>
-        <input type="text" name="day" id="day">
-    </div>
-    <div class = "form-control">
-        <label for="text">URL Proyecto</label>
-        <input type="text" name="day" id="day">
+        <input type="text" name="day" id="day" formControlName="urlImagen">
     </div>
     <div style="height: 20px;">
-    <button (click)="AgregarProyecto()">
+    <button type="submit">
         <fa-icon [icon]="faCheck"></fa-icon>
     </button>
     <button (click)="salirAgregarProyecto()">
@@ -46,7 +46,7 @@
                     <h3>{{proyecto.nombre}}</h3>
                 </div>
                 <div class="iconosedicion col" *ngIf="UsuarioLogueado()">
-                    <button>
+                    <button (click)="eliminarProyecto(proyecto.idProyecto)">
                         <fa-icon [icon]="faeliminar"></fa-icon>
                     </button>
                     <button  (click)="editarproyectoparticular(proyecto.idProyecto)">
@@ -61,29 +61,29 @@
         </div>
     </div>
     <div *ngIf="editable() == proyecto.idProyecto">
-        <form class="edit-form">
+        <form class="edit-form" (ngSubmit)="EditarProyecto()" [formGroup]="formEditar">
             <div class = "form-control">
                 <label for="text">Nombre</label>
-                <input type="text" name="text" id="text" value="{{proyecto.nombre}}">
+                <input type="text" name="text" id="text" formControlName="nombre">
             </div>
             <div class = "form-control">
                 <label for="text">Descripción</label>
-                <input type="text" name="day" id="day" value="{{proyecto.descripcion}}">
+                <input type="text" name="day" id="day" formControlName="fecha">
             </div>
             <div class = "form-control">
                 <label for="text">Fecha</label>
-                <input type="text" name="day" id="day"value="{{proyecto.fecha}}">
+                <input type="text" name="day" id="day" formControlName="descripcion">
             </div>
             <div class = "form-control">
                 <label for="text">URL Imagen</label>
-                <input type="text" name="day" id="day" value="{{proyecto.urlImagen}}">
+                <input type="text" name="day" id="day" formControlName="url">
             </div>
             <div class = "form-control">
                 <label for="text">URL Proyecto</label>
-                <input type="text" name="day" id="day" value="{{proyecto.url}}">
+                <input type="text" name="day" id="day" formControlName="urlImagen">
             </div>
             <div style="height: 35px;">
-            <button (click)="EditarProyecto()">
+            <button type="submit">
                 <fa-icon [icon]="faCheck"></fa-icon>
             </button>
             <button (click)="salirEdicionProyecto()">
