@@ -26,8 +26,8 @@
     </button>
 </div>
 </form>
-<div *ngFor="let skill of datosskills">
-    <div class="habilidad row" *ngIf="editable() != skill.idSkill">
+<div *ngFor="let skill of datosskills; let indexOfelement=index;">
+    <div class="habilidad row" *ngIf="editable() != indexOfelement">
         <p class="p">{{skill.skill}}</p>
         <div class="barra">
             <progress class="skills_barra" max="100" value={{skill.nivel}}></progress>
@@ -37,12 +37,12 @@
             <button (click)="EliminarSkill(skill.idSkill)">
                 <fa-icon [icon]="faeliminar"></fa-icon>
             </button>
-            <button (click)="editarskillparticular(skill.idSkill)">
+            <button (click)="editarskillparticular(indexOfelement)">
                 <fa-icon [icon]="editIcon"></fa-icon>
             </button>
         </div>
     </div>
-    <div *ngIf="editable() == skill.idSkill">
+    <div *ngIf="editable() == indexOfelement">
         <form class="edit-form" [formGroup]="formEditar" (ngSubmit)="EditarSkill()">
             <div class = "form-control">
                 <label for="text">Skill</label>

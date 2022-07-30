@@ -1,26 +1,8 @@
-#imagenprincipal{
-    position: relative;
-}
-
-#imagenprincipal
-img{
-    width: 100%;
-    height: auto;
-    max-height: 300px;
-    border-radius: 20px;
-}
-
-#imagenprincipal
-.iconoeditar{
-    position: absolute;
-    top: 3%;
-    right: 3%;
-}
-
 #fotoperfil{
     position: relative;
-    margin-top: -10%;
     display: flex;
+    margin-top: -60px;
+
 }
 #imagenyboton{
     position: relative;
@@ -29,6 +11,7 @@ img{
     width: 20%;
     max-width: 150px;
     margin-left: 4%;
+    max-height: 150px;
 }
 #fotoperfil
 img{
@@ -38,21 +21,32 @@ img{
 
 #fotoperfil
 .iconoeditar{
-    position: relative;
-    text-align: center;
-    background-color: darkmagenta;
+    position: absolute;
+    margin-left: 36%;
+    margin-right: 36%;
     margin-top: -60%;
 }
 
 .edit{
+    margin-left: 1%;
     width: 70%;
     display: flex;
     align-items: center;
 }
 .informacion{
-    margin: 8% 2% 2% 2%;
+    margin: 1% 2% 2% 2%;
 }
 
-.boton{
+.botonContacto{
+    margin-top: 10px;
     border-radius: 200px;
+}
+
+input{
+    position: relative;
+    width:100%;
+    margin-left: 1%;
+}
+.edicionacercade{
+    height: 100%;
 }

@@ -1,44 +1,51 @@
 .habilidades{
     height: 40px;
-    background-color: brown;
+    align-items: center;
+    background-color: rgb(189, 189, 236);
+    border: 1px black solid;
+    border-radius :10px ;
+    padding-left: 2%;
 }
 .habilidades
 .iconoeditar{
-float: right;
-margin-right: 2%;
+    float: right;
+    margin-right: 2%;
+    margin-top: 3px;
 }
 
 .barra{
     background-color: blanchedalmond;
-    width: 75%;
+    width: 90%;
+    padding-left: 5%;
+    height: 40px;
 }
 
 .habilidad{
-    background-color: blueviolet;
     margin-top: 2%;
     margin-left: 2%;
     margin-right: 2%;
+    padding-left: 5%;
 }
 .skills_barra{
     width: 85%;
-    height: 30px;
+    height: 40px;
     float: left;
 }
 .porcentaje{
     width: 10%;
-background-color: aquamarine;
 float: right;
+padding-top: 7px;
 }
 .iconosedicion{
-background-color: chartreuse;
-width: 10%;
+width: 5%;
 min-width: 90px;
-
+padding-top: 5px;
 }
 
 .p{
     background-color: cornflowerblue;
-    width: 75%;
+    width: 90%;
+    font-size:x-large;
 }
 
 button{

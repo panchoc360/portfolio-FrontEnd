@@ -15,7 +15,7 @@ export class EducacionComponent implements OnInit {
 
   verAgregarEducacion: boolean = false;
   editareducacion: boolean = false;
-  eduaeditar: string = "";
+  eduaeditar?: number | undefined;
   formNuevo: FormGroup;
   formEditar: FormGroup;
 
@@ -73,33 +73,33 @@ export class EducacionComponent implements OnInit {
 
   editareducacionparticular(eduid : number)
   {
-    let editarEducacion: Educacion = this.datosEducacion[eduid - 1];
+    let editarEducacion: Educacion = this.datosEducacion[eduid];
     this.formEditar.patchValue({
-      idEducacion: eduid,
+      idEducacion: editarEducacion.idEducacion,
       nombreInstitucion: editarEducacion.nombreInstitucion,
       titulo: editarEducacion.titulo,
       inicio: editarEducacion.inicio,
       fin: editarEducacion.fin,
       urlImagen: editarEducacion.urlImagen
     })
-    this.eduaeditar = String(eduid);
+    this.eduaeditar = eduid;
   }
 
-  editable() : string
+  editable() : number | undefined
   {
     return this.eduaeditar;
   }
   salirEdicionEducacion(){
-    this.eduaeditar = "";
+    this.eduaeditar = undefined;
 
   }
   EditarEducacion(){ 
        let editarEducacion: Educacion = this.formEditar.value;
     this.http.put<Educacion>('http://localhost:8080/editar/educacion/', editarEducacion)
     .subscribe(data => this.ngOnInit());
-    this.eduaeditar = "";
+    this.eduaeditar = undefined;
   }
-  eliminarEducacion(eduid : string){
+  eliminarEducacion(eduid : number){
     console.log("Eliminar " + eduid)
     this.http.delete<any>('http://localhost:8080/borrar/educacion/' + eduid)
     .subscribe(data => {console.log(data)});

@@ -1,14 +1,35 @@
 <div class="parte_superior_header">
     <div class="AP" style="float: left;"><img src="https://argentinaprograma.inti.gob.ar/pluginfile.php/1/theme_moove/logo/1653341386/APLogo-20-20.png"></div>
     <div class="redessociales" style="float: right">
-        <a href="" target="_top"> <img src="../../../assets/imagenes/facebook1.png"></a>
-        <a href="" target="_top"> <img src="../../../assets/imagenes/instagram1.png"></a>
-        <a href="" target="_top"> <img src="../../../assets/imagenes/twitter1.png"></a>        
+        <a href="https://www.facebook.com/pancho0383" target="_blank"> <img src="../../../assets/imagenes/facebook1.png"></a>
+        <a href="https://www.instagram.com/pancho3383/" target="_blank"> <img src="../../../assets/imagenes/instagram1.png"></a>
+        <a href="https://twitter.com/FranCutchet" target="_blank"> <img src="../../../assets/imagenes/twitter1.png"></a>        
         <button class="btn" (click)="BotonLogin()">
             {{UsuarioLogueado() ? 'Salir' : 'Ingresar'}}
         </button>
  
     </div>
 </div>
-
+<div id="imagenprincipal" *ngIf="ruta.url == '/portfolio'">
+    <img [src]="datospersona?.urlImagenPortada" alt="Bienvenidos" />
+    <div *ngIf="UsuarioLogueado()">
+    <div class="iconoeditar2">
+        <form class="add-form" (ngSubmit)="EditarImagenPrincipal()" *ngIf="editarImagenPrincipal">
+            <div class="form-control" style="display: flex ;">
+                <label for="text">Agregar link a imagen principal</label>
+                <input style="width: 100%;"  type="text" name="text" [formControl]="campoEditablePortada" >
+                <button type="submit">
+                    <fa-icon [icon]="faCheck"></fa-icon>
+                </button>
+                <button (click)="salirEdicionImagenPrincipal()">
+                    <fa-icon [icon]="faX"></fa-icon>
+                </button>
+            </div>
+        </form>
+    </div >
+        <button class="iconoeditar" *ngIf="!editarImagenPrincipal" (click)="HabilitarEdicionImagenPrincipal()">
+            <fa-icon [icon]="faPen"></fa-icon>
+        </button>
+    </div>
+</div>
 

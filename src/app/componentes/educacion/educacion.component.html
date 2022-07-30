@@ -38,9 +38,9 @@
     </button>
 </div>
 </form>
-<li *ngFor="let educacion of datosEducacion">
-    <div class="item" *ngIf="editable() != educacion.idEducacion">
-        <div class="urlimagen" style="float: left">
+<li *ngFor="let educacion of datosEducacion; let indexOfelement=index;">
+    <div class="item row" *ngIf="editable() != indexOfelement">
+        <div class="urlimagen">
             <img [src]="educacion.urlImagen" alt="logo">
         </div>
         <div class="informacioneducacion">
@@ -54,20 +54,34 @@
                             <button (click)="eliminarEducacion(educacion.idEducacion)">
                                 <fa-icon [icon]="faeliminar"></fa-icon>
                             </button>
-                            <button (click)="editareducacionparticular(educacion.idEducacion)">
+                            <button (click)="editareducacionparticular(indexOfelement)">
                                 <fa-icon [icon]="editIcon"></fa-icon>
                             </button>
                         </div>
                     </div>
                 </div>
                 <div class="titulo">
-                    <h5>{{educacion.titulo}}</h5>
+                    <h5>            
+                        <span [ngSwitch]="educacion.fin">
+                            <span *ngSwitchCase=0>Estudiando para obtener el título de {{educacion.titulo}}</span>
+                            <span *ngSwitchCase="">Estudiando para obtener el título de {{educacion.titulo}}</span>
+                            <span *ngSwitchCase=null>Estudiando para obtener el título de {{educacion.titulo}}</span>
+                            <span *ngSwitchDefault>Título obtenido: {{educacion.titulo}}</span>
+                          </span>
+                    </h5>
                 </div>
-                <div class="inicio">{{educacion.inicio}}-{{educacion.fin}}</div>
+                <div class="inicio">Estudios realizados desde {{educacion.inicio}} hasta 
+                    <span [ngSwitch]="educacion.fin">
+                        <span *ngSwitchCase=0>la actualidad</span>
+                        <span *ngSwitchCase="">la actualidad</span>
+                        <span *ngSwitchCase=null>la actualidad</span>
+                        <span *ngSwitchDefault>{{educacion.fin}}</span>
+                      </span>
+                </div>
             </div>
         </div>
     </div>
-    <div *ngIf="editable() == educacion.idEducacion">
+    <div *ngIf="editable() == indexOfelement">
         <form class="edit-form" [formGroup]="formEditar">
             <div class = "form-control">
                 <label for="text">Nombre de la Institucion</label>

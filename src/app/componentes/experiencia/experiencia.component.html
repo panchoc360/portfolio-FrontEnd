@@ -47,8 +47,8 @@
 </div>
 </form>
 
-<li *ngFor="let experiencia of datosExperiencia">
-    <div class="item" *ngIf="editable() != experiencia.idExperiencia">
+<li *ngFor="let experiencia of datosExperiencia; let indexOfelement=index;">
+    <div class="item row" *ngIf="editable() != indexOfelement">
         <div class="urlimagen" style="float: left">
             <a [href]="experiencia.urlWebPage" target="_blank"><img [src]="experiencia.urlLogo" alt="logo"></a>
         </div>
@@ -63,7 +63,7 @@
                             <button (click)="eliminarExperiencia(experiencia.idExperiencia)">
                                 <fa-icon [icon]="faeliminar"></fa-icon>
                             </button>
-                            <button (click)="editarexperienciaparticular(experiencia.idExperiencia)">
+                            <button (click)="editarexperienciaparticular(indexOfelement)">
                                 <fa-icon [icon]="editIcon" ></fa-icon>
                             </button>
                         </div>
@@ -72,12 +72,19 @@
                 <div class="cargo">
                     <h5>{{experiencia.cargoOcupado}}</h5>
                 </div>
-                <div class="inicio">{{experiencia.inicio}}-{{experiencia.fin}}</div>
+                <div class="inicio">Desempeñado desde {{experiencia.inicio}} hasta 
+                    <span [ngSwitch]="experiencia.fin">
+                        <span *ngSwitchCase=0>la actualidad</span>
+                        <span *ngSwitchCase="">la actualidad</span>
+                        <span *ngSwitchCase=null>la actualidad</span>
+                        <span *ngSwitchDefault>{{experiencia.fin}}</span>
+                      </span>
+                </div>
                 <div class="descripcion">{{experiencia.descripcion}}</div>
             </div>
         </div>
     </div>
-    <div *ngIf="editable() == experiencia.idExperiencia">
+    <div *ngIf="editable() == indexOfelement">
         <form class="edit-form" [formGroup]="formEdit">
             <div class = "form-control">
                 <label for="text">Lugar</label>

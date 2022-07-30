@@ -16,7 +16,7 @@ export class ProyectosComponent implements OnInit {
 @Input() btnIngresar: boolean = false;
 verAgregarProyecto: boolean = false;
 editarproyecto: boolean = false;
-proyectoaeditar: string = "";
+proyectoaeditar?: number = undefined;
 formNuevo: FormGroup;
 formEditar: FormGroup;
 
@@ -58,7 +58,6 @@ constructor(private formBuilder: FormBuilder, private datosPortfolio: PortfolioS
   }
   AgregarProyecto(){
     let nuevoProyecto: Proyecto = this.formNuevo.value;
-    console.log(nuevoProyecto);
     this.http.post<Proyecto>('http://localhost:8080/crear/proyecto/', nuevoProyecto)
     .subscribe(data => this.ngOnInit());
     
@@ -73,36 +72,38 @@ constructor(private formBuilder: FormBuilder, private datosPortfolio: PortfolioS
 
   editarproyectoparticular(proyectoid : number)
   {
-    let editarProyecto: Proyecto = this.datosProyectos[proyectoid - 1];
+    let editarProyecto: Proyecto = this.datosProyectos[proyectoid];
+
     this.formEditar.patchValue({
-      idProyecto: proyectoid,
-      nombre: editarProyecto.nombre,
-      fecha: editarProyecto.fecha,
-      descripcion: editarProyecto.descripcion,
-      url: editarProyecto.url,
-      urlImagen: editarProyecto.urlImagen
+      idProyecto: editarProyecto.idProyecto,
+      nombre: editarProyecto?.nombre,
+      fecha: editarProyecto?.fecha,
+      descripcion: editarProyecto?.descripcion,
+      url: editarProyecto?.url,
+      urlImagen: editarProyecto?.urlImagen
     })
-    this.proyectoaeditar = String(proyectoid);
+    this.proyectoaeditar = proyectoid;
   }
 
-  editable() : string
+  editable() : number | undefined
   {
     return this.proyectoaeditar;
   }
+
   salirEdicionProyecto(){
-    this.proyectoaeditar = "";
+    this.proyectoaeditar = undefined;
 
   }
   EditarProyecto(){
     let editarProyecto: Proyecto = this.formEditar.value;
+    console.log(editarProyecto);
     this.http.put<Proyecto>('http://localhost:8080/editar/proyecto/', editarProyecto)
     .subscribe(data => this.ngOnInit());
-    this.proyectoaeditar = "";
+    this.proyectoaeditar = undefined;
   }
 
-  eliminarProyecto(proyectoid : string){
-    console.log("Eliminar " + proyectoid)
+  eliminarProyecto(proyectoid : number){
     this.http.delete<any>('http://localhost:8080/borrar/proyecto/' + proyectoid)
-    .subscribe(data => {console.log(data)});
+    .subscribe(() => window.location.reload());
   }
 }

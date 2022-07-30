@@ -1,31 +1,32 @@
 .proyectos{
     height: 40px;
     align-items: center;
-    background-color: brown;
+    background-color: rgb(189, 189, 236);
+    border: 1px black solid;
+    border-radius :10px ;
+    padding-left: 2%;
 }
 .proyectos
 .iconoeditar{
-float: right;
-margin-right: 2%;
+    float: right;
+    margin-right: 2%;
+    margin-top: 3px;
 }
 
 .item{
-    height: 200px;
-    background-color: aquamarine;
-    margin-left: 3%;
-    margin-right: 3%;
+    min-height: 200px;
+    border: 1px black solid;
+    border-radius :10px ;
 }
 
 .informacionproyectos{
     float: right;
     height: 100%;
-    background-color: chocolate;
     width: 100%;
     padding-top: 2%;
     
 }
 .nombre{
-    background-color: chartreuse;
     margin: 0% 1% 1% 1%;
 }
 

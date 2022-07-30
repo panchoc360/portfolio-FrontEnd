@@ -19,12 +19,10 @@ export class AcercaComponent implements OnInit {
   faPen = faPen;
   faCheck = faCheck;
   faX = faX;
-  editarImagenPrincipal: boolean = false;
   editarImagenPerfil: boolean = false;
   editarNombre: boolean = false;
   editarAcercaDe: boolean = false;
   text: string = "";
-  campoEditablePortada = new FormControl('');
   campoEditablePerfil = new FormControl('');
   campoEditableNombre = new FormControl('');
   campoEditableAcercaDe = new FormControl('');
@@ -52,20 +50,7 @@ export class AcercaComponent implements OnInit {
   }
 
 
-  HabilitarEdicionImagenPrincipal() {
-    this.campoEditablePortada.setValue(this.datospersona.urlImagenPortada)
-    this.editarImagenPrincipal = true;
-  }
-  EditarImagenPrincipal() {
-    let datospersonamodificados: Persona = this.datospersona;
-    datospersonamodificados.urlImagenPortada = this.campoEditablePortada.value;
-      this.http.put<Persona>('http://localhost:8080/editar/persona/', datospersonamodificados)
-      .subscribe(data => this.datospersona = data);
-      this.editarImagenPrincipal = false;
-  }
-  salirEdicionImagenPrincipal() {
-    this.editarImagenPrincipal = false;
-  }
+  
 
 
   HabilitarEdicionImagenPerfil() {

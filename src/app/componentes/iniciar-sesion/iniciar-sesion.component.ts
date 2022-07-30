@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
@@ -10,6 +10,7 @@ import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 })
 export class IniciarSesionComponent implements OnInit {
   @Input() logged: boolean = false;
+  @Output() salir = new EventEmitter();
   form: FormGroup;
 
   constructor(private FormBuilder:FormBuilder, private autenticacionService:AutenticacionService, private ruta:Router) {
@@ -36,6 +37,7 @@ export class IniciarSesionComponent implements OnInit {
     this.autenticacionService.IniciarSesion(this.form.value).subscribe(data=>{
       this.token = data.token;
       this.logged = true;
+      this.salir.emit();
       this.ruta.navigate(['/portfolio']);
     },
     err => console.log("No autorizado")

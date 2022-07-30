@@ -15,7 +15,7 @@ export class ExperienciaComponent implements OnInit {
 
   verAgregarExperiencia: boolean = false;
   editarexperiencia: boolean = false;
-  expaeditar: string = "";
+  expaeditar?: number = undefined;
   agregarLugar = new FormControl('');
   agregarCargo = new FormControl('');
   agregarFechaInicio = new FormControl('');
@@ -78,9 +78,10 @@ export class ExperienciaComponent implements OnInit {
 
   editarexperienciaparticular(expid : number)
   {
-    let editarExperiencia: Experiencia = this.datosExperiencia[expid - 1];
+    let editarExperiencia: Experiencia = this.datosExperiencia[expid];
+
     this.formEdit.patchValue({
-      idExperiencia: expid,
+      idExperiencia: editarExperiencia.idExperiencia,
       nombreLugar: editarExperiencia.nombreLugar,
       cargoOcupado: editarExperiencia.cargoOcupado,
       inicio: editarExperiencia.inicio,
@@ -89,21 +90,20 @@ export class ExperienciaComponent implements OnInit {
       urlLogo: editarExperiencia.urlLogo,
       urlWebPage: editarExperiencia.urlWebPage
     })
-    this.expaeditar = String(expid);
+    this.expaeditar = expid;
   }
 
-  eliminarExperiencia(expid : string){
-    console.log("Eliminar " + expid)
+  eliminarExperiencia(expid : number){
     this.http.delete<any>('http://localhost:8080/borrar/experiencia/' + expid)
     .subscribe(data => {this.datosExperiencia = data;
     console.log(data)});
   }
-  editable() : string
+  editable() : number | undefined
   {
     return this.expaeditar;
   }
   salirEdicionExperiencia(){
-    this.expaeditar = "";
+    this.expaeditar = undefined;
 
   }
   EditarExperiencia(){
@@ -111,7 +111,7 @@ export class ExperienciaComponent implements OnInit {
     let editarExperiencia: Experiencia = this.formEdit.value;
       this.http.put<Experiencia>('http://localhost:8080/editar/experiencia/', editarExperiencia)
       .subscribe(data => this.ngOnInit());
-      this.expaeditar = "";
+      this.expaeditar = undefined;
 
   }
 }

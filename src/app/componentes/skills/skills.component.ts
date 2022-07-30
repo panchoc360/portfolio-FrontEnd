@@ -15,7 +15,7 @@ export class SkillsComponent implements OnInit {
 
   verAgregarSkill: boolean = false;
   editarskill: boolean = false;
-  skillaeditar: string = "";
+  skillaeditar?: number;
   formNuevo: FormGroup;
   formEditar: FormGroup;
   
@@ -67,33 +67,32 @@ export class SkillsComponent implements OnInit {
 
   editarskillparticular(skillid : number)
   {
-    let editarSkill: Skill = this.datosskills[skillid - 1];
+    let editarSkill: Skill = this.datosskills[skillid];
     this.formEditar.patchValue({
-      idSkill: skillid,
+      idSkill: editarSkill.idSkill,
       skill: editarSkill.skill,
       nivel: editarSkill.nivel,
     })
-    this.skillaeditar = String(skillid);
+    this.skillaeditar = skillid;
   }
 
-  editable() : string
+  editable() : number | undefined
   {
 
     return this.skillaeditar;
   }
   salirEdicionSkill(){
-    this.skillaeditar = "";
+    this.skillaeditar = undefined;
 
   }
   EditarSkill(){
     let editarSkill: Skill = this.formEditar.value;
     this.http.put<Skill>('http://localhost:8080/editar/skill/', editarSkill)
     .subscribe(data => this.ngOnInit());
-    this.skillaeditar = "";
+    this.skillaeditar = undefined;
   }
 
   EliminarSkill(skillid : string){
-    console.log("Eliminar " + skillid)
     this.http.delete<any>('http://localhost:8080/borrar/skill/' + skillid)
     .subscribe(data => {console.log(data)});
   }

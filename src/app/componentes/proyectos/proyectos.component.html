@@ -38,8 +38,8 @@
     </button>
 </div>
 </form>
-<li *ngFor="let proyecto of datosProyectos">
-    <div class="item"  *ngIf="editable() != proyecto.idProyecto">
+<li *ngFor="let proyecto of datosProyectos; let indexOfelement=index;">
+    <div class="item row"  *ngIf="editable() != indexOfelement">
         <div class="informacionproyectos">
             <div class="nombre row">
                 <div class="nombre1 col">
@@ -49,7 +49,7 @@
                     <button (click)="eliminarProyecto(proyecto.idProyecto)">
                         <fa-icon [icon]="faeliminar"></fa-icon>
                     </button>
-                    <button  (click)="editarproyectoparticular(proyecto.idProyecto)">
+                    <button  (click)="editarproyectoparticular(indexOfelement)">
                         <fa-icon [icon]="editIcon"></fa-icon>
                     </button>
                 </div>
@@ -57,29 +57,31 @@
             <div class="nombre row">
                 <h5>Año: {{proyecto.fecha}}</h5>
             </div>
-            <div class="nombre row">{{proyecto.descripcion}}</div>
+            <div class="nombre row" style="padding-left: 10px;">{{proyecto.descripcion}}</div>
+            <div class="nombre row"><a [href]="proyecto.url" target="_blank">{{proyecto.url}}</a></div>
         </div>
+        
     </div>
-    <div *ngIf="editable() == proyecto.idProyecto">
+    <div *ngIf="editable() == indexOfelement">
         <form class="edit-form" (ngSubmit)="EditarProyecto()" [formGroup]="formEditar">
             <div class = "form-control">
-                <label for="text">Nombre</label>
+                <label for="text">Nombre del proyecto</label>
                 <input type="text" name="text" id="text" formControlName="nombre">
             </div>
             <div class = "form-control">
-                <label for="text">Descripción</label>
+                <label for="text">Fecha de realización</label>
                 <input type="text" name="day" id="day" formControlName="fecha">
             </div>
             <div class = "form-control">
-                <label for="text">Fecha</label>
+                <label for="text">Descripción</label>
                 <input type="text" name="day" id="day" formControlName="descripcion">
             </div>
             <div class = "form-control">
-                <label for="text">URL Imagen</label>
+                <label for="text">URL Proyecto</label>
                 <input type="text" name="day" id="day" formControlName="url">
             </div>
             <div class = "form-control">
-                <label for="text">URL Proyecto</label>
+                <label for="text">URL Imagen</label>
                 <input type="text" name="day" id="day" formControlName="urlImagen">
             </div>
             <div style="height: 35px;">
