@@ -16,7 +16,7 @@ import { AppRoutingModule } from '../app-routing.module/app-routing.module';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private datosPortfolio: PortfolioService, private loggeado: AutenticacionService, public ruta: Router, private http: HttpClient) {
+  constructor(private portfolioService: PortfolioService, private loggeado: AutenticacionService, public ruta: Router, private http: HttpClient) {
   }
 
   editarImagenPrincipal: boolean = false;
@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.datosPortfolio.obtenerDatos().subscribe(data => {
+    this.portfolioService.obtenerDatos().subscribe(data => {
       console.log(data);
       this.datospersona = data.persona;
     });
@@ -58,8 +58,7 @@ export class HeaderComponent implements OnInit {
   EditarImagenPrincipal() {
     let datospersonamodificados: Persona = this.datospersona;
     datospersonamodificados.urlImagenPortada = this.campoEditablePortada.value;
-    this.http.put<Persona>('http://localhost:8080/editar/persona/', datospersonamodificados)
-      .subscribe(data => this.datospersona = data);
+    this.portfolioService.editarPersona(datospersonamodificados).subscribe(data => this.datospersona = data);
     this.editarImagenPrincipal = false;
   }
   salirEdicionImagenPrincipal() {

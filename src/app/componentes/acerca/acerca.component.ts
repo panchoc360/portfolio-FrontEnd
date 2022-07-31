@@ -27,13 +27,13 @@ export class AcercaComponent implements OnInit {
   campoEditableNombre = new FormControl('');
   campoEditableAcercaDe = new FormControl('');
   
-  constructor(private datosPortfolio: PortfolioService, private loggeado: AutenticacionService, private http: HttpClient) {
+  constructor(private portfolioService: PortfolioService, private loggeado: AutenticacionService, private http: HttpClient) {
 
   }
   datospersona: any;
 
   ngOnInit(): void {
-    this.datosPortfolio.obtenerDatos().subscribe(data => {
+    this.portfolioService.obtenerDatos().subscribe(data => {
       this.datospersona = data.persona;
     })
   }
@@ -49,10 +49,6 @@ export class AcercaComponent implements OnInit {
       return false;
   }
 
-
-  
-
-
   HabilitarEdicionImagenPerfil() {
     this.campoEditablePerfil.setValue(this.datospersona.urlImagenPerfil)
     this.editarImagenPerfil = true;
@@ -60,8 +56,7 @@ export class AcercaComponent implements OnInit {
   EditarImagenPerfil() {
     let datospersonamodificados: Persona = this.datospersona;
     datospersonamodificados.urlImagenPerfil = this.campoEditablePerfil.value;
-      this.http.put<Persona>('http://localhost:8080/editar/persona/', datospersonamodificados)
-      .subscribe(data => this.datospersona = data);
+    this.portfolioService.editarPersona(datospersonamodificados).subscribe(data => this.ngOnInit());
       this.editarImagenPerfil = false;
   }
   salirEdicionImagenPerfil() {
@@ -76,8 +71,7 @@ export class AcercaComponent implements OnInit {
   EditarNombre(){
     let datospersonamodificados: Persona = this.datospersona;
     datospersonamodificados.nombre = this.campoEditableNombre.value;
-      this.http.put<Persona>('http://localhost:8080/editar/persona/', datospersonamodificados)
-      .subscribe(data => this.datospersona = data);
+    this.portfolioService.editarPersona(datospersonamodificados).subscribe(data => this.ngOnInit());
       this.editarNombre = false;
   }
   SalirEdicionNombre(){
@@ -92,8 +86,7 @@ export class AcercaComponent implements OnInit {
   GuardarAcercaDe(){
     let datospersonamodificados: Persona = this.datospersona;
     datospersonamodificados.acercade = this.campoEditableAcercaDe.value;
-      this.http.put<Persona>('http://localhost:8080/editar/persona/', datospersonamodificados)
-      .subscribe(data => this.datospersona = data);
+    this.portfolioService.editarPersona(datospersonamodificados).subscribe(data => this.ngOnInit());
       this.editarAcercaDe = false;
   }
   SalirEdicionAcercaDe(){

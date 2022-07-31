@@ -25,7 +25,7 @@ export class ExperienciaComponent implements OnInit {
   agregarURLPagina = new FormControl('');
   formEdit!: FormGroup;
   
-  constructor(private formBuilder: FormBuilder, private datosPortfolio: PortfolioService, private loggeado: AutenticacionService, private http: HttpClient) {
+  constructor(private formBuilder: FormBuilder, private portfolioService: PortfolioService, private loggeado: AutenticacionService, private http: HttpClient) {
     this.formEdit = this.formBuilder.group({
       idExperiencia: [''],
       nombreLugar: ['', [Validators.required]],
@@ -50,7 +50,7 @@ export class ExperienciaComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.datosPortfolio.obtenerDatos().subscribe(data =>{
+    this.portfolioService.obtenerDatos().subscribe(data =>{
       this.datosExperiencia = data.experiencia;
     })
   }
@@ -64,8 +64,7 @@ export class ExperienciaComponent implements OnInit {
 
   AgregarExperiencia(){
     let nuevaExperiencia: Experiencia = {nombreLugar: this.agregarLugar.value , cargoOcupado: this.agregarCargo.value, inicio: this.agregarFechaInicio.value, fin: this.agregarFechaFin.value, descripcion: this.agregardescripcion.value, urlLogo: this.agregarURLLogo.value, urlWebPage: this.agregarURLPagina.value };
-      this.http.post<Experiencia>('http://localhost:8080/crear/experiencia/', nuevaExperiencia)
-      .subscribe(data => this.ngOnInit());
+    this.portfolioService.agregarExperiencia(nuevaExperiencia).subscribe(data => this.ngOnInit());
       this.verAgregarExperiencia = false;
   // VER porque hay que refrescar la pagina para visualizar la nueva exp
   }
@@ -94,8 +93,7 @@ export class ExperienciaComponent implements OnInit {
   }
 
   eliminarExperiencia(expid : number){
-    this.http.delete<any>('http://localhost:8080/borrar/experiencia/' + expid)
-    .subscribe(data => {this.datosExperiencia = data;
+ this.portfolioService.eliminarExperiencia(expid).subscribe(data => {this.datosExperiencia = data;
     console.log(data)});
   }
   editable() : number | undefined
@@ -109,8 +107,7 @@ export class ExperienciaComponent implements OnInit {
   EditarExperiencia(){
 
     let editarExperiencia: Experiencia = this.formEdit.value;
-      this.http.put<Experiencia>('http://localhost:8080/editar/experiencia/', editarExperiencia)
-      .subscribe(data => this.ngOnInit());
+    this.portfolioService.editarExperiencia(editarExperiencia).subscribe(data => this.ngOnInit());
       this.expaeditar = undefined;
 
   }

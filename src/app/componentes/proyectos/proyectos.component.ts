@@ -20,7 +20,7 @@ proyectoaeditar?: number = undefined;
 formNuevo: FormGroup;
 formEditar: FormGroup;
 
-constructor(private formBuilder: FormBuilder, private datosPortfolio: PortfolioService, private loggeado: AutenticacionService, private http: HttpClient) {
+constructor(private formBuilder: FormBuilder, private portfolioService: PortfolioService, private loggeado: AutenticacionService, private http: HttpClient) {
   this.formNuevo = this.formBuilder.group({
     nombre: ['', [Validators.required]],
     fecha: ['', [Validators.required]],
@@ -45,7 +45,7 @@ constructor(private formBuilder: FormBuilder, private datosPortfolio: PortfolioS
   faeliminar = faTrash;
 
   ngOnInit(): void {
-    this.datosPortfolio.obtenerDatos().subscribe(data =>{
+    this.portfolioService.obtenerDatos().subscribe(data =>{
       this.datosProyectos = data.proyecto;
     })
   }
@@ -58,9 +58,7 @@ constructor(private formBuilder: FormBuilder, private datosPortfolio: PortfolioS
   }
   AgregarProyecto(){
     let nuevoProyecto: Proyecto = this.formNuevo.value;
-    this.http.post<Proyecto>('http://localhost:8080/crear/proyecto/', nuevoProyecto)
-    .subscribe(data => this.ngOnInit());
-    
+    this.portfolioService.agregarProyecto(nuevoProyecto).subscribe(data => this.ngOnInit());
     this.verAgregarProyecto = false;
   }
   salirAgregarProyecto(){
@@ -96,14 +94,11 @@ constructor(private formBuilder: FormBuilder, private datosPortfolio: PortfolioS
   }
   EditarProyecto(){
     let editarProyecto: Proyecto = this.formEditar.value;
-    console.log(editarProyecto);
-    this.http.put<Proyecto>('http://localhost:8080/editar/proyecto/', editarProyecto)
-    .subscribe(data => this.ngOnInit());
+    this.portfolioService.editarProyecto(editarProyecto).subscribe(data => this.ngOnInit());
     this.proyectoaeditar = undefined;
   }
 
   eliminarProyecto(proyectoid : number){
-    this.http.delete<any>('http://localhost:8080/borrar/proyecto/' + proyectoid)
-    .subscribe(() => window.location.reload());
+    this.portfolioService.eliminarProyecto(proyectoid).subscribe(() => window.location.reload());
   }
 }

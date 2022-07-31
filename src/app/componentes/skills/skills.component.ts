@@ -19,7 +19,7 @@ export class SkillsComponent implements OnInit {
   formNuevo: FormGroup;
   formEditar: FormGroup;
   
-  constructor(private formBuilder: FormBuilder, private datosPortfolio: PortfolioService, private loggeado: AutenticacionService, private http: HttpClient) {
+  constructor(private formBuilder: FormBuilder, private portfolioService: PortfolioService, private loggeado: AutenticacionService, private http: HttpClient) {
     this.formNuevo = this.formBuilder.group({
       skill: ['', [Validators.required]],
       nivel: ['', [Validators.required]],
@@ -39,7 +39,7 @@ export class SkillsComponent implements OnInit {
   faeliminar = faTrash;
 
   ngOnInit(): void {
-    this.datosPortfolio.obtenerDatos().subscribe(data =>{
+    this.portfolioService.obtenerDatos().subscribe(data =>{
       this.datosskills = data.skill;
     })
   }
@@ -54,8 +54,7 @@ export class SkillsComponent implements OnInit {
   AgregarSkill(){
     let nuevaSkill: Skill = this.formNuevo.value;
     console.log(nuevaSkill);
-    this.http.post<Skill>('http://localhost:8080/crear/skill/', nuevaSkill)
-    .subscribe(data => this.ngOnInit());
+ this.portfolioService.agregarSkill(nuevaSkill).subscribe(data => this.ngOnInit());
     this.verAgregarSkill = false;
   }
   salirAgregarSkill(){
@@ -87,13 +86,11 @@ export class SkillsComponent implements OnInit {
   }
   EditarSkill(){
     let editarSkill: Skill = this.formEditar.value;
-    this.http.put<Skill>('http://localhost:8080/editar/skill/', editarSkill)
-    .subscribe(data => this.ngOnInit());
+    this.portfolioService.editarSkill(editarSkill).subscribe(data => this.ngOnInit());
     this.skillaeditar = undefined;
   }
 
-  EliminarSkill(skillid : string){
-    this.http.delete<any>('http://localhost:8080/borrar/skill/' + skillid)
-    .subscribe(data => {console.log(data)});
+  EliminarSkill(skillid : number){
+    this.portfolioService.eliminarSkill(skillid).subscribe(data => {console.log(data)});
   }
 }

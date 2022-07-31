@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 import { faPen, faAdd, faTrash, faCheck, faX } from '@fortawesome/free-solid-svg-icons';
 import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
-import { FormBuilder, FormControl, FormGroup, Validators  } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Educacion } from 'src/app/Modelos';
 import { HttpClient } from '@angular/common/http';
 
@@ -19,7 +19,7 @@ export class EducacionComponent implements OnInit {
   formNuevo: FormGroup;
   formEditar: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private datosPortfolio: PortfolioService, private loggeado: AutenticacionService, private http: HttpClient) {
+  constructor(private formBuilder: FormBuilder, private portfolioService: PortfolioService, private loggeado: AutenticacionService, private http: HttpClient) {
     this.formNuevo = this.formBuilder.group({
       nombreInstitucion: ['', [Validators.required]],
       titulo: ['', [Validators.required]],
@@ -35,44 +35,42 @@ export class EducacionComponent implements OnInit {
       fin: [''],
       urlImagen: ['', [Validators.required]],
     })
-   }
-  datosEducacion:any;
+  }
+  datosEducacion: any;
   editIcon = faPen;
   faCheck = faCheck;
   faX = faX;
   agregarIcono = faAdd;
   faeliminar = faTrash;
-  text:string = "";
+  text: string = "";
   day: string = "";
 
   ngOnInit(): void {
-    this.datosPortfolio.obtenerDatos().subscribe(data =>{
+    this.portfolioService.obtenerDatos().subscribe(data => {
       this.datosEducacion = data.educacion;
     })
   }
-  UsuarioLogueado(){
+  UsuarioLogueado() {
     let currentUser = this.loggeado.IsLogged;
     if (currentUser && currentUser.token)
-    return true;
+      return true;
     else
-    return false;
+      return false;
   }
-  AgregarEducacion(){
+  AgregarEducacion() {
     let nuevaEducacion: Educacion = this.formNuevo.value;
     console.log(nuevaEducacion);
-    this.http.post<Educacion>('http://localhost:8080/crear/educacion/', nuevaEducacion)
-    .subscribe(data => this.ngOnInit());
+    this.portfolioService.agregarEducacion(nuevaEducacion).subscribe(data => this.ngOnInit());
     this.verAgregarEducacion = false;
   }
-  salirAgregarEducacion(){
+  salirAgregarEducacion() {
     this.verAgregarEducacion = false;
   }
-  VerAgregarEducacion(){
+  VerAgregarEducacion() {
     this.verAgregarEducacion = true;
   }
 
-  editareducacionparticular(eduid : number)
-  {
+  editareducacionparticular(eduid: number) {
     let editarEducacion: Educacion = this.datosEducacion[eduid];
     this.formEditar.patchValue({
       idEducacion: editarEducacion.idEducacion,
@@ -85,23 +83,20 @@ export class EducacionComponent implements OnInit {
     this.eduaeditar = eduid;
   }
 
-  editable() : number | undefined
-  {
+  editable(): number | undefined {
     return this.eduaeditar;
   }
-  salirEdicionEducacion(){
+  salirEdicionEducacion() {
     this.eduaeditar = undefined;
 
   }
-  EditarEducacion(){ 
-       let editarEducacion: Educacion = this.formEditar.value;
-    this.http.put<Educacion>('http://localhost:8080/editar/educacion/', editarEducacion)
-    .subscribe(data => this.ngOnInit());
+  EditarEducacion() {
+    let editarEducacion: Educacion = this.formEditar.value;
+    console.log(editarEducacion);
+    this.portfolioService.editarEducacion(editarEducacion).subscribe(data => this.ngOnInit());
     this.eduaeditar = undefined;
   }
-  eliminarEducacion(eduid : number){
-    console.log("Eliminar " + eduid)
-    this.http.delete<any>('http://localhost:8080/borrar/educacion/' + eduid)
-    .subscribe(data => {console.log(data)});
+  eliminarEducacion(eduid: number) {
+    this.portfolioService.eliminarEducacion(eduid).subscribe(data => this.ngOnInit());
   }
 }
