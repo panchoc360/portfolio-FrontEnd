@@ -18,7 +18,7 @@ export interface Experiencia{
     urlWebPage: string;
 }
 export interface Educacion{
-    idEducacion?: number;
+    idEducacion: number;
     nombreInstitucion: string;
     titulo: string;
     inicio: string;

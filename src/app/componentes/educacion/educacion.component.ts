@@ -36,7 +36,7 @@ export class EducacionComponent implements OnInit {
       urlImagen: ['', [Validators.required]],
     })
   }
-  datosEducacion: any;
+  datosEducacion: Educacion[] = [];
   editIcon = faPen;
   faCheck = faCheck;
   faX = faX;
@@ -60,7 +60,8 @@ export class EducacionComponent implements OnInit {
   AgregarEducacion() {
     let nuevaEducacion: Educacion = this.formNuevo.value;
     console.log(nuevaEducacion);
-    this.portfolioService.agregarEducacion(nuevaEducacion).subscribe(data => this.ngOnInit());
+    this.portfolioService.agregarEducacion(nuevaEducacion)
+    .subscribe(data => this.ngOnInit());
     this.verAgregarEducacion = false;
   }
   salirAgregarEducacion() {
@@ -97,6 +98,9 @@ export class EducacionComponent implements OnInit {
     this.eduaeditar = undefined;
   }
   eliminarEducacion(eduid: number) {
-    this.portfolioService.eliminarEducacion(eduid).subscribe(data => this.ngOnInit());
+    console.log(eduid);
+    this.portfolioService.eliminarEducacion(eduid)
+    .subscribe(data => this.datosEducacion = data);
   }
 }
+//this.datosEducacion.filter(t => t.idEducacion !== eduid)

@@ -91,6 +91,6 @@ export class SkillsComponent implements OnInit {
   }
 
   EliminarSkill(skillid : number){
-    this.portfolioService.eliminarSkill(skillid).subscribe(data => {console.log(data)});
+    this.portfolioService.eliminarSkill(skillid).subscribe(data => this.ngOnInit());
   }
 }

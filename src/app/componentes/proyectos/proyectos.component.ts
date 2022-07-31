@@ -99,6 +99,6 @@ constructor(private formBuilder: FormBuilder, private portfolioService: Portfoli
   }
 
   eliminarProyecto(proyectoid : number){
-    this.portfolioService.eliminarProyecto(proyectoid).subscribe(() => window.location.reload());
+    this.portfolioService.eliminarProyecto(proyectoid).subscribe(data => this.ngOnInit());
   }
 }

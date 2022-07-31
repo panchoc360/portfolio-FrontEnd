@@ -1,15 +1,23 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, observable } from 'rxjs';
 import { Educacion, Experiencia, Persona, Proyecto, Skill } from '../Modelos';
+
+/*
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':'text/plain'
+  })
+}
+*/
 
 @Injectable({
   providedIn: 'root'
 })
 export class PortfolioService {
 
-  private url = 'http://localhost:8080';
-  //private url = 'https://backendfrancisco.herokuapp.com';
+  //private url = 'http://localhost:8080';
+  private url = 'https://backendfrancisco.herokuapp.com';
 
   constructor(private http:HttpClient) { }
 
@@ -21,8 +29,8 @@ export class PortfolioService {
     return this.http.put<Persona>(this.url + '/editar/persona/', datospersonamodificados);
   }
 
-  agregarEducacion(nuevaEducacion: Educacion):Observable<Educacion>{
-    return this.http.post<Educacion>(this.url + '/crear/educacion/', nuevaEducacion);
+  agregarEducacion(nuevaEducacion: Educacion):Observable<string>{
+    return this.http.post<string>(this.url + '/crear/educacion/', nuevaEducacion);
   }
 
   eliminarEducacion(educacionaeliminar: number):Observable<any>{
